@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/public/helpers.php';
+
+// Create a dependency injection container
+$builder = new DI\ContainerBuilder();
+
+// Adding settings
+$builder->addDefinitions(dirname(__DIR__) . '/boot/container.php');
+
+// Generate container
+$container = $builder->build();
+
+// Create the kernel commands
+$kernel = new Console\Kernel();
+
+// Create the console application
+$console = new Console\Console($container, 'Wiring Maker', APP_VERSION);
+$console->boot($kernel);
+
+// Starts run
+$console->run();

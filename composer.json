@@ -1,0 +1,31 @@
+{
+    "name": "ar2labs/wiring-start",
+    "description": "Wiring micro framework start",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Anderson Costa",
+            "email": "arcostasi@gmail.com"
+        }
+    ],
+    "require": {
+        "ar2labs/wiring": "^2.0.0",
+        "hassankhan/config": "^2.0",
+        "illuminate/database": "^5.8",
+        "league/route": "^4.3",
+        "monolog/monolog": "^1.24",
+        "php-di/php-di": "^6.0",
+        "symfony/console": "^4.3",
+        "twig/twig": "^2.11",
+        "vlucas/phpdotenv": "^3.4",
+        "zendframework/zend-diactoros": "^2.1",
+        "zendframework/zend-httphandlerrunner": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/App/",
+            "Console\\": "app/Console/"
+        }
+    }
+}
