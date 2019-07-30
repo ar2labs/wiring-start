@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <!-- Para evitar que a maioria dos rastreadores da Web de
+         mecanismos de pesquisa indexem uma página do seu site -->
+    <meta name="robots" content="noindex">
+
+    <!-- Meta tags para controlar o layout em navegadores de dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <!-- Shortcut icon -->
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+
+    <!-- Proprietary style sheets -->
+    <link rel="stylesheet" href="{{ '/css/phpinfo.css' }}">
+
+    <title>PHP Info</title>
+</head>
+<body data-spy="scroll" data-target="#primary-menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="php-info">
+                    {{ phpinfo | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

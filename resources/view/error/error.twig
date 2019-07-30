@@ -1,0 +1,38 @@
+{% extends "templates/error.twig" %}
+{% block content %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Ops! Ocorreu um erro</h2>
+                    <h3>Detalhes</h3>
+                    <ul>
+                        <li>
+                            <strong>Código:</strong> {{ code }}
+                        </li>
+                        <li>
+                            <strong>Mensagem:</strong> {{ message|raw }}
+                        </li>
+                        {% if debug %}
+                        <li>
+                            <strong>Arquivo:</strong> <span>{{ file }}</span>
+                        </li>
+                        <li>
+                            <strong>Linha:</strong> <span>{{ line }}</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% if debug %}
+                        <h3>Debug</h3>
+                        <ul class="list">
+                            {{ trace|raw }}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

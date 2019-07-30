@@ -1,0 +1,18 @@
+{% extends "templates/error.twig" %}
+{% block content %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>400 - Método não permitido</h2>
+                    <p>Método não permitido. Requerido:
+                        <strong>{{ allow }}</strong></p>
+                    <a href="/">Por favor, volte à nossa página inicial.</a>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block script %}
+
+{% endblock %}
