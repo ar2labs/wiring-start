@@ -1,5 +1,5 @@
 Wiring Start
-=======
+============
 
 Wiring is a PHP micro framework core with Interoperability (PSRs).
 
@@ -14,39 +14,35 @@ Wiring is a PHP micro framework core with Interoperability (PSRs).
 2. Change to the directory created
 
     ```bash
-    cd wiring-skeleton/
+    cd wiring-start/
     ```
 
-3. Download Composer
-
-    Run this in your terminal to get the latest Composer version:
+3. Composer Install
 
     ```bash
-    curl -sS https://getcomposer.org/installer | php
+    composer install
     ```
 
-    or if you don't have curl:
+    or if you don't have a composer installation:
 
-    ```bash
-    php -r "readfile('https://getcomposer.org/installer');" | php
-    ```
+    [Get Composer](https://getcomposer.org/download/)
 
-4. Composer Install
-
-    ```bash
-    php composer.phar install
-    ```
-
-5. Start PHP Built-in web server:
+4. Start PHP Built-in web server:
 
     ```bash
     php maker serve
     ```
 
-    or use:
+    or run with php:
 
     ```bash
     php -S 127.0.0.1:8000 -t public/
+    ```
+
+5. Open your browser at:
+
+    ```bash
+    http://127.0.0.1:8000
     ```
 
 ## Requirements
@@ -57,9 +53,16 @@ The following versions of PHP are supported by this version.
 * PHP 7.2
 * PHP 7.3
 
-## Documentation
+PHP Extension Requirements:
 
-Contribute to this documentation. ;)
+* CMath
+* Ctype
+* JSON
+* Mbstring
+* OpenSSL
+* PDO
+* Tokenizer
+* XML
 
 ## Copyright and license
 
