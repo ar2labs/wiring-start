@@ -27,7 +27,13 @@ Wiring is a PHP micro framework core with Interoperability (PSRs).
 
     [Get Composer](https://getcomposer.org/download/)
 
-4. Start PHP Built-in web server:
+4. Create `.env`
+
+    ```bash
+    cp .env.example .env
+    ```
+
+5. Start PHP Built-in web server:
 
     ```bash
     php maker serve
@@ -39,7 +45,7 @@ Wiring is a PHP micro framework core with Interoperability (PSRs).
     php -S 127.0.0.1:8000 -t public/
     ```
 
-5. Open your browser at:
+6. Open your browser at:
 
     ```bash
     http://127.0.0.1:8000
