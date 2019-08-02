@@ -204,7 +204,13 @@ return [
                     ->to($response);
             } else {
                 $view = $container->get(ViewStrategyInterface::class);
-                switch ($error[0]) {
+                switch ($error['code']) {
+                    case 400:
+                        $allow = implode(', ', $exception);
+                        return $view
+                            ->render('error/error400.twig', ['allow' => $allow])
+                            ->to($response, 400);
+                        break;
                     case 404:
                         return $view
                             ->render('error/error404.twig')
