@@ -8,6 +8,7 @@ use App\Model\User;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wiring\Http\Controller\AbstractRestfulController;
+use Noodlehaus\Exception;
 
 class UserRestfulController extends AbstractRestfulController
 {
@@ -20,7 +21,7 @@ class UserRestfulController extends AbstractRestfulController
      */
     public function index(ServerRequestInterface $request): ResponseInterface
     {
-        $users = User::all();
+        $users = User::where('active', '=', true)->get();
         $data = $this->success('Ok', $users);
 
         return $this
@@ -38,21 +39,37 @@ class UserRestfulController extends AbstractRestfulController
      */
     public function create(ServerRequestInterface $request): ResponseInterface
     {
-
         $input = json_decode($request->getBody()->getContents(), true);
 
-        try {
-            $user = User::create([
-                'username' => $input['username'],
-                'email' => $input['email'],
-                'active' => $input['active'],
-                'password' => $input['password']
-            ]);   
-            $data = $this->success('Ok', $user);
-        } catch (Exception $e) {
-            $data = $this->error('Ocorreu um problema durante a criação.', 500, $input);
+        if (!isset($input['username'])) {
+            throw new Exception('The username attribute is required.');
         }
-        
+
+        if (!isset($input['email'])) {
+            throw new Exception('The email attribute is required.');
+        }
+
+        if (!isset($input['password'])) {
+            throw new Exception('The password attribute is required.');
+        }
+
+        if (!isset($input['active'])) {
+            throw new Exception('The active attribute is required.');
+        }
+
+        $user = User::create([
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'active' => $input['active'],
+            'password' => $input['password'],
+        ]);
+
+        if (!$user) {
+            $data = $this->error('User create error.', 500, $input);
+        } else {
+            $data = $this->success('User created', $user, 201);
+        }
+
         return $this
             ->json()
             ->render($data)
@@ -71,11 +88,10 @@ class UserRestfulController extends AbstractRestfulController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-
         $user = User::find($args['id']);
 
         if (!$user) {
-            $data = $this->error('Usuário não encontrado.', 404, $user);
+            $data = $this->error('User not found.', 404, $user);
         } else {
             $data = $this->success('Ok', $user);
         }
@@ -90,7 +106,7 @@ class UserRestfulController extends AbstractRestfulController
      * Update\Replace an existing resource.
      *
      * @param ServerRequestInterface $request
-     * @param array $args\
+     * @param array $args
      *
      * @return ResponseInterface $response
      */
@@ -98,22 +114,22 @@ class UserRestfulController extends AbstractRestfulController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-        
         $input = json_decode($request->getBody()->getContents(), true);
         $user = User::find($args['id']);
 
         if (!$user) {
-            $data = $this->error('Usuário não encontrado.', 404, $user);
+            $data = $this->error('User not found.', 404, $user);
         } else {
-            try {
-                $user['username'] = $input['username'] ?? $user['username'];
-                $user['email'] = $input['email'] ?? $user['email'];
-                $user['active'] = $input['active'] ?? $user['active'];
-                $user['password'] = $input['password'] ?? $user['password'];
-                $user->save();
+            // Set fields
+            $user['username'] = $input['username'] ?? $user['username'];
+            $user['email'] = $input['email'] ?? $user['email'];
+            $user['active'] = $input['active'] ?? $user['active'];
+            $user['password'] = $input['password'] ?? $user['password'];
+
+            if ($user->save()) {
                 $data = $this->success('Ok', $user);
-            } catch (Exception $e) {
-                $data = $this->error('Ocorreu um problema durante a atualização.', 500, $input);
+            } else {
+                $data = $this->error('User create error.', 304, $input);
             }
         }
 
@@ -139,17 +155,17 @@ class UserRestfulController extends AbstractRestfulController
         $user = User::find($args['id']);
 
         if (!$user) {
-            $data = $this->error('Usuário não encontrado.', 404, $user);
+            $data = $this->error('User not found.', 404, $user);
         } else {
-            try {
-                $user['username'] = $input['username'] ?? $user['username'];
-                $user['email'] = $input['email'] ?? $user['email'];
-                $user['active'] = $input['active'] ?? $user['active'];
-                $user['password'] = $input['password'] ?? $user['password'];
-                $user->save();
+            $user['username'] = $input['username'] ?? $user['username'];
+            $user['email'] = $input['email'] ?? $user['email'];
+            $user['active'] = $input['active'] ?? $user['active'];
+            $user['password'] = $input['password'] ?? $user['password'];
+
+            if ($user->save()) {
                 $data = $this->success('Ok', $user);
-            } catch (Exception $e) {
-                $data = $this->error('Ocorreu um problema durante a modificação.', 500, $input);
+            } else {
+                $data = $this->error('User create error.', 304, $input);
             }
         }
 
@@ -171,18 +187,16 @@ class UserRestfulController extends AbstractRestfulController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-
         $user = User::find($args['id']);
 
         if (!$user) {
-            $data = $this->error('Usuário não encontrado.', 404, $user);
+            $data = $this->error('User not found.', 404, $user);
         } else {
-            try {
-                $user['active'] = false;
-                $user->save();
+            $user['active'] = false;
+            if ($user->save()) {
                 $data = $this->success('Ok', $user);
-            } catch (Exception $e) {
-                $data = $this->error('Ocorreu um problema durante a exclusão.', 500, $input);
+            } else {
+                $data = $this->error('User delete error.', 304);
             }
         }
 
