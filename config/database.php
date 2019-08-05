@@ -13,7 +13,7 @@ return [
             'dbname' => env('DB_DATABASE'),
             'user' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
-            'charset' => env('DB_CHARSET')
+            'charset' => env('DB_CHARSET'),
 
         ],
 
@@ -26,10 +26,10 @@ return [
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD'),
             'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci'
+            'collation' => 'utf8_unicode_ci',
 
-        ]
+        ],
 
-    ]
+    ],
 
 ];

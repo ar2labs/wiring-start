@@ -6,7 +6,6 @@ use App\Http\Controller\UserRestfulController;
 
 // API RESTful v1 example
 $route->group('/api/v1', function ($route) {
-
     $route->get('/user', [UserRestfulController::class, 'index'])
         ->setName('rest-list');
 

@@ -1,6 +1,7 @@
 <?php
 
-use App\Provider\{Auth, Eloquent};
+use App\Provider\Auth;
+use App\Provider\Eloquent;
 
 use League\Route\Router;
 use League\Route\Strategy\ApplicationStrategy;
@@ -11,31 +12,33 @@ use Monolog\Logger;
 use Noodlehaus\Config;
 
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
-use Wiring\Http\Helpers\{Console, Loader, Mailer, Session};
+use Wiring\Http\Helpers\Console;
+use Wiring\Http\Helpers\Loader;
+use Wiring\Http\Helpers\Mailer;
+use Wiring\Http\Helpers\Session;
 use Wiring\Http\Exception\ErrorHandler;
-use Wiring\Strategy\{JsonStrategy, ViewStrategy};
+use Wiring\Strategy\JsonStrategy;
+use Wiring\Strategy\ViewStrategy;
 
 use Zend\Diactoros\Response;
 
-use Wiring\Interfaces\{
-    AuthInterface,
-    ConfigInterface,
-    ConsoleInterface,
-    DatabaseInterface,
-    ErrorHandlerInterface,
-    HashInterface,
-    JsonStrategyInterface,
-    MailerInterface,
-    RouterInterface,
-    SessionInterface,
-    ViewStrategyInterface
-};
+use Wiring\Interfaces\AuthInterface;
+use Wiring\Interfaces\ConfigInterface;
+use Wiring\Interfaces\ConsoleInterface;
+use Wiring\Interfaces\DatabaseInterface;
+use Wiring\Interfaces\ErrorHandlerInterface;
+use Wiring\Interfaces\JsonStrategyInterface;
+use Wiring\Interfaces\MailerInterface;
+use Wiring\Interfaces\RouterInterface;
+use Wiring\Interfaces\SessionInterface;
+use Wiring\Interfaces\ViewStrategyInterface;
 
 return [
 
@@ -199,37 +202,42 @@ return [
 
             if ($handler->isJson()) {
                 $json = $container->get(JsonStrategyInterface::class);
+
                 return $json
                     ->render($error, JSON_UNESCAPED_SLASHES)
                     ->to($response);
-            } else {
-                $view = $container->get(ViewStrategyInterface::class);
-                switch ($error['code']) {
+            }
+            $view = $container->get(ViewStrategyInterface::class);
+            switch ($error['code']) {
                     case 400:
                         $allow = implode(', ', $exception);
+
                         return $view
                             ->render('error/error400.twig', ['allow' => $allow])
                             ->to($response, 400);
+
                         break;
                     case 404:
                         return $view
                             ->render('error/error404.twig')
                             ->to($response, 404);
+
                         break;
                     case 405:
                         // Define allow methods
                         $allow = implode(', ', $exception);
+
                         return $view
                             ->render('error/error405.twig', ['allow' => $allow])
                             ->to($response, 405);
+
                         break;
                     default:
                         return $view
                             ->render('error/error.twig', $error)
                             ->to($response);
                 }
-            }
         };
-    }
+    },
 
 ];

@@ -19,7 +19,7 @@ class Console extends Application
      * @param string $name
      * @param string $version
      */
-    function __construct(ContainerInterface $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
+    public function __construct(ContainerInterface $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
         parent::__construct($name, $version);
 

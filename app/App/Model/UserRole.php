@@ -30,6 +30,6 @@ class UserRole extends Model
      */
     public static $defaults = [
         'is_admin' => false,
-        'created_at' => ''
+        'created_at' => '',
     ];
 }

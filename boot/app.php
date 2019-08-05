@@ -3,11 +3,14 @@
 use App\Http\Middleware\SessionMiddleware;
 
 use Wiring\Application;
-use Wiring\Interfaces\{ConfigInterface, DatabaseInterface, RouterInterface};
-use Wiring\Http\Middleware\{EmitterMiddleware, RouterMiddleware};
+use Wiring\Interfaces\ConfigInterface;
+use Wiring\Interfaces\DatabaseInterface;
+use Wiring\Interfaces\RouterInterface;
+use Wiring\Http\Middleware\EmitterMiddleware;
+use Wiring\Http\Middleware\RouterMiddleware;
 
-use Zend\Diactoros\{Response, ServerRequestFactory};
-use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
+use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequestFactory;
 
 // Create a dependency injection container
 $builder = new DI\ContainerBuilder();
@@ -49,7 +52,6 @@ $request = ServerRequestFactory::fromGlobals(
 );
 
 $response = new Response();
-$emitter = new SapiEmitter();
 
 // Create application
 $app = new Application($container, $request, $response);
@@ -60,7 +62,7 @@ $route = $container->get(RouterInterface::class);
 // Adding global middlewares
 $app->addRouterMiddleware(new RouterMiddleware($route))
     ->addMiddleware(new SessionMiddleware, 'session')
-    ->addEmitterMiddleware(new EmitterMiddleware($emitter));
+    ->addEmitterMiddleware(new EmitterMiddleware());
 
 // Let's Go!
 $app->run();

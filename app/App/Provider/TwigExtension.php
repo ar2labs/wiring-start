@@ -59,7 +59,7 @@ class TwigExtension extends \Twig_Extension
      */
     public function path($name = ''): string
     {
-        return env('APP_URL', "http://" . $_SERVER['SERVER_NAME']) . $name;
+        return env('APP_URL', 'http://' . $_SERVER['SERVER_NAME']) . $name;
     }
 
     /**
