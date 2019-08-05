@@ -13,6 +13,6 @@ return [
         'from' => env('MAIL_FROM', 'noreply@example.com'),
         'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
-    ]
+    ],
 
 ];

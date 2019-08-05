@@ -1,7 +1,7 @@
 <?php
 
 // Define application version
-define('APP_VERSION', '2.0.0');
+define('APP_VERSION', '2.0.6');
 define('ROOT_PATH', dirname(__DIR__));
 define('BOOT_PATH', ROOT_PATH . '/boot');
 
@@ -9,8 +9,14 @@ chdir(ROOT_PATH);
 
 // Try to load autoload composer
 if (!@include_once(dirname(__DIR__) . '/vendor/autoload.php')) {
-    throw new \Exception('Unable to load file autoload.php at ' .
-        dirname(__DIR__) . '/vendor');
+    throw new \ParseError('Unable to load file autoload.php at ' .
+        dirname(__DIR__) . '/vendor/');
+    die;
+}
+
+if (!glob(dirname(__DIR__) . '/.env')) {
+    throw new \ParseError('Unable to load file .env at ' .
+        dirname(__DIR__) . '/');
     die;
 }
 

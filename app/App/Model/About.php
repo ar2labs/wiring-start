@@ -55,6 +55,7 @@ class About extends BaseModel
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class About extends BaseModel
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ class About extends BaseModel
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -109,6 +112,7 @@ class About extends BaseModel
     public function setAuthor($author)
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -127,6 +131,7 @@ class About extends BaseModel
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -145,6 +150,7 @@ class About extends BaseModel
     public function setLocation($location)
     {
         $this->location = $location;
+
         return $this;
     }
 
@@ -162,7 +168,7 @@ class About extends BaseModel
             'author' => $this->getAuthor(),
             'email' => $this->getEmail(),
             'location' => $this->getLocation(),
-            'created' => $this->getCreated()
+            'created' => $this->getCreated(),
         ];
     }
 }

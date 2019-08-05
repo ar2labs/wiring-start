@@ -25,7 +25,7 @@ class User extends Model
      */
     protected $fillable = [
         'username', 'email', 'password', 'active', 'active_hash',
-        'remember_identifier', 'remember_token', 'recover_hash'
+        'remember_identifier', 'remember_token', 'recover_hash',
     ];
 
     /**
@@ -35,7 +35,7 @@ class User extends Model
      */
     protected $hidden = [
         'password', 'active_hash', 'remember_identifier',
-        'remember_token', 'recover_hash'
+        'remember_token', 'recover_hash',
     ];
 
     /**

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controller;
 
-use App\Model\{User, About, Book, Log};
+use App\Model\User;
+use App\Model\About;
+use App\Model\Book;
+use App\Model\Log;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wiring\Http\Controller\AbstractJsonViewController;
@@ -25,7 +28,7 @@ class IndexController extends AbstractJsonViewController
         return $this
             ->view()
             ->render('home.twig', [
-                'pageTitle' => 'AR2 Tecnologia'
+                'pageTitle' => 'AR2 Tecnologia',
             ])
             ->to($this->response);
     }
@@ -155,7 +158,7 @@ class IndexController extends AbstractJsonViewController
         return $this
             ->view()
             ->render('info.twig', [
-                'phpinfo' => Info::phpinfo()
+                'phpinfo' => Info::phpinfo(),
             ])
             ->to($this->response);
     }

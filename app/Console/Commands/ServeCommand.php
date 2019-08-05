@@ -54,7 +54,7 @@ class ServeCommand extends Command
         $host = $input->getOption('host');
         $port = $input->getOption('port');
 
-        $mesg = "<info>PHP built-in Web Server started on" .
+        $mesg = '<info>PHP built-in Web Server started on' .
             "</info> <comment>http://{$host}:{$port}</comment>";
 
         $output->writeln($mesg);
@@ -75,7 +75,8 @@ class ServeCommand extends Command
     protected function checkPhpVersion()
     {
         if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-            $mesg = "This PHP binary is not version 5.4 or greater.";
+            $mesg = 'This PHP binary is not version 5.4 or greater.';
+
             throw new \Exception($mesg);
         }
     }

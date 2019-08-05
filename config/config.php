@@ -8,6 +8,6 @@ return [
 
     'database' => env('DB_CONNECTION', 'eloquent'),
 
-    'auth' => env('API_AUTH', 'jwt')
+    'auth' => env('API_AUTH', 'jwt'),
 
 ];

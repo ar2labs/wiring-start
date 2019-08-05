@@ -141,7 +141,7 @@ class Book extends BaseModel
             'title' => $this->getTitle(),
             'author' => $this->getAuthor(),
             'edition' => $this->getEdition(),
-            'year' => $this->getYear()
+            'year' => $this->getYear(),
         ];
     }
 }
