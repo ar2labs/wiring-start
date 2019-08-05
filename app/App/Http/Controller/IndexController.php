@@ -11,8 +11,8 @@ use App\Model\Log;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wiring\Http\Controller\AbstractJsonViewController;
-use Zend\Diactoros\Response;
 use Wiring\Http\Helpers\Info;
+use Zend\Diactoros\Response;
 
 class IndexController extends AbstractJsonViewController
 {
