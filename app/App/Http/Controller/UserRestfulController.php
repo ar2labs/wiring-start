@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controller;
 
 use App\Model\User;
+use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wiring\Http\Controller\AbstractRestfulController;
-use Noodlehaus\Exception;
 
 class UserRestfulController extends AbstractRestfulController
 {
