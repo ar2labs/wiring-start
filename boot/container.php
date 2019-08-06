@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Provider\Auth;
 use App\Provider\Eloquent;
 
@@ -18,17 +20,13 @@ use Psr\Log\LoggerInterface;
 
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Throwable;
 
 use Wiring\Http\Helpers\Console;
 use Wiring\Http\Helpers\Loader;
 use Wiring\Http\Helpers\Mailer;
 use Wiring\Http\Helpers\Session;
 use Wiring\Http\Exception\ErrorHandler;
-use Wiring\Strategy\JsonStrategy;
-use Wiring\Strategy\ViewStrategy;
-
-use Zend\Diactoros\Response;
-
 use Wiring\Interfaces\AuthInterface;
 use Wiring\Interfaces\ConfigInterface;
 use Wiring\Interfaces\ConsoleInterface;
@@ -39,6 +37,10 @@ use Wiring\Interfaces\MailerInterface;
 use Wiring\Interfaces\RouterInterface;
 use Wiring\Interfaces\SessionInterface;
 use Wiring\Interfaces\ViewStrategyInterface;
+use Wiring\Strategy\JsonStrategy;
+use Wiring\Strategy\ViewStrategy;
+
+use Zend\Diactoros\Response;
 
 return [
 
@@ -170,7 +172,7 @@ return [
         return function (
             ServerRequestInterface $request = null,
             ResponseInterface $response = null,
-            $exception
+            Throwable $exception
         ) use ($container) {
 
             // Get logger and config instance
@@ -207,36 +209,33 @@ return [
                     ->render($error, JSON_UNESCAPED_SLASHES)
                     ->to($response);
             }
+
             $view = $container->get(ViewStrategyInterface::class);
+
             switch ($error['code']) {
-                    case 400:
+                case 404:
+                    return $view
+                        ->render('error/error404.twig')
+                        ->to($response, 404);
+
+                    break;
+                case 405:
+                    // Define allow methods
+                    $allow = [];
+                    if (is_array($exception)) {
                         $allow = implode(', ', $exception);
+                    }
 
-                        return $view
-                            ->render('error/error400.twig', ['allow' => $allow])
-                            ->to($response, 400);
+                    return $view
+                        ->render('error/error405.twig', ['allow' => $allow])
+                        ->to($response, 405);
 
-                        break;
-                    case 404:
-                        return $view
-                            ->render('error/error404.twig')
-                            ->to($response, 404);
-
-                        break;
-                    case 405:
-                        // Define allow methods
-                        $allow = implode(', ', $exception);
-
-                        return $view
-                            ->render('error/error405.twig', ['allow' => $allow])
-                            ->to($response, 405);
-
-                        break;
-                    default:
-                        return $view
-                            ->render('error/error.twig', $error)
-                            ->to($response);
-                }
+                    break;
+                default:
+                    return $view
+                        ->render('error/error.twig', $error)
+                        ->to($response);
+            }
         };
     },
 
