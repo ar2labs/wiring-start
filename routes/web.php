@@ -21,5 +21,5 @@ $route->get('/logs', [IndexController::class, 'logs'])
 $route->get('/book', [IndexController::class, 'book'])
     ->setName('book');
 
-    $route->get('/info', [IndexController::class, 'info'])
+$route->get('/info', [IndexController::class, 'info'])
     ->setName('info');
