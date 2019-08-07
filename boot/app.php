@@ -59,10 +59,12 @@ $app = new Application($container, $request, $response);
 /** @var \League\Route\RouteCollection $route */
 $route = $container->get(RouterInterface::class);
 
+$emitter = null;
+
 // Adding global middlewares
 $app->addRouterMiddleware(new RouterMiddleware($route))
     ->addMiddleware(new SessionMiddleware, 'session')
-    ->addEmitterMiddleware(new EmitterMiddleware());
+    ->addEmitterMiddleware(new EmitterMiddleware($emitter));
 
 // Let's Go!
 $app->run();

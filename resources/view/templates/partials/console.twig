@@ -1,8 +1,8 @@
 {% if session.has('console.log') %}
-    <!-- Console log script -->
-    <script>
-    {% for console in session.get('console.log') %}
-    {{ console | raw }}
-    {% endfor %}</script>
-    {{ session.forget('console.log') }}
+  <!-- Console log script -->
+  <script>
+  {% for console in session.get('console.log') %}
+  {{ console | raw }}
+  {% endfor %}</script>
+  {{ session.forget('console.log') }}
 {% endif %}
