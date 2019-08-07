@@ -28,7 +28,7 @@ class IndexController extends AbstractJsonViewController
         return $this
             ->view()
             ->render('home.twig', [
-                'pageTitle' => 'AR2 Tecnologia',
+                'pageTitle' => 'AR2 Labs :: Wiring',
             ])
             ->to($this->response);
     }

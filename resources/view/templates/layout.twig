@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <meta name="author" content="AR2 Labs">
+  <meta charset="utf-8">
+  <meta name="author" content="AR2 Labs">
 
-    <!-- Meta tags mais utilizadas nos robos de busca -->
-    <meta name="description" content="Wiring is a PHP micro framework core.">
-    <meta name="keywords" content="wiring,ar2labs,microframework,php,psr">    <meta name="robots" content="index, follow">
+  <!-- Meta tags most commonly used in search robots -->
+  <meta name="description" content="Wiring is a PHP micro framework core.">
+  <meta name="keywords" content="wiring,ar2labs,microframework,php,psr">
+  <meta name="robots" content="index, follow">
 
-    <!-- Meta tags para controlar o layout em navegadores móveis -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <!-- Meta tags to control layout in mobile browsers -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-    <!-- Shortcut icon -->
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+  <!-- Shortcut icons -->
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
 
-    <!-- Style sheets -->
-    <link rel="stylesheet" href="{{ '/css/style.min.css' }}">
+  <!-- Style sheets -->
+  <link rel="stylesheet" href="{{ '/css/style.css' }}">
 
-    <title>{{ pageTitle }}</title>
+  <title>{{ pageTitle }}</title>
 </head>
 <body data-spy="scroll" data-target="#primary-menu">
 
 {% block content %}{% endblock %}
-    <!-- Scripts -->
 {% block script %}{% endblock %}
 
 </body>

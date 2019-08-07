@@ -1,11 +1,9 @@
 {% extends "templates/error.twig" %}
 {% block content %}
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h2>Ops! An error has occurred</h2>
-                    <a href="/">Please return to the home page and try again.</a>
+  <div class="content">
+    <div class="center">
+      <h2>Ops! An error has occurred</h2>
+      <a href="/">Please return to the home page and try again.</a>
 <pre style="text-align: left;">
 
 <strong>Details:</strong>
@@ -22,12 +20,9 @@
 <span style="font-size: 12px">{{ trace|raw }}</span>
 {% endif %}
 </pre>
-
-                </div>
-            </div>
-        </div>
-    </header>
-    <br>
+    </div>
+  </div>
+  <br>
 {% endblock %}
 {% block script %}
 
