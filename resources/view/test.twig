@@ -23,13 +23,13 @@
                     <label>URL <span>*</span></label> <br />
                     <div class="row w-100">
                         <div class="flex-10">
-                            <input class="w-100" type="text" />
+                            <input id="url" name="url" class="w-100" type="text" />
                         </div>
                         <div class="flex-2 action-select" >
-                            <select class="bk-color-white w-100">
-                                <option>GET</option>
-                                <option>POST</option>
-                                <option>DELETE</option>
+                            <select id="method" name="method" class="bk-color-white w-100" onchange="updateInput()" >
+                                <option value="GET" selected >GET</option>
+                                <option value="POST" >POST</option>
+                                <option value="DEL" >DELETE</option>
                             </select>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="row w-100">
                         <div class="flex-1 pdg-r">
                             <div class="row-column w-100">
-                                <label>Input <span>*</span> (JSON)</label>
+                                <label>Input (JSON)</label>
                                 <textarea id="input" name="input" rows="15" ></textarea>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                     <br />
                      <div class="row w-100">
                         <div class="flex-1">
-                            <button class="w-100"  onclick="msgInfo()" >Executar</button>
+                            <button class="w-100" type="submit"  onclick="execute()" >Executar</button>
                         </div>
                      </div>
             </fieldset>
