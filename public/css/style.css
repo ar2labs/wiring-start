@@ -63,6 +63,35 @@ img {
   height: auto;
 }
 
+label {
+  margin: 0.5em 0 0.2em;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0.35em 0 0.75em;
+  border: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0.3em 0;
+  margin-bottom: 0.3em;
+  color: white;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+input, select, textarea {
+  padding: 0.5em 0.6em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
 a:link {
   color: #ffffff;
 }
@@ -92,3 +121,51 @@ a:hover {
 .light {
   color: #ffffff;
 }
+
+.container {
+  padding-right: 15em;
+  padding-left: 15em;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.form {
+    cursor: not-allowed;
+    color: #cad2d3;
+}
+
+.color-danger {
+  color: #dc3545 !important;
+}
+
+.bk-color-white {
+  background-color: white;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+button {
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  color: #444; /* rgba not supported (IE 8) */
+  color: rgba(0, 0, 0, 0.80); /* rgba supported */
+  border: 1px solid #999;  /*IE 6/7/8*/
+  border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+  background-color: #E6E6E6;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.btn-success {
+  background: rgb(28, 184, 65);
+  color: white;
+}
+
+.btn-secondary {
+  background: rgb(66, 184, 221); /* this is a light blue */
+  color: white;
+}
+

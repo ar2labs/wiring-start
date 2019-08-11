@@ -162,4 +162,22 @@ class IndexController extends AbstractJsonViewController
             ])
             ->to($this->response);
     }
+
+    /**
+     * Test you api page.
+     *
+     * @param Request $request
+     * @param Response $response
+     *
+     * @return Reponse
+     */
+    public function test(ServerRequestInterface $request): ResponseInterface
+    {       
+        return $this
+            ->view()
+            ->render('test.twig', [
+                'pageTitle' => 'Test your API',
+            ])
+            ->to($this->response);
+    }
 }
