@@ -1,0 +1,46 @@
+.row {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.pdg-l {
+  padding-left: 1em;
+}
+
+.pdg-r {
+  padding-right: 1em;
+}
+
+.row-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  display: flex;
+  flex: 1;
+}
+
+.flex-2 {
+  display: flex;
+  flex: 2;
+}
+
+.flex-10 {
+  display: flex;
+  flex: 10;
+}
+
+.action-select {
+  padding-left: 1em;
+}
+
+.btn-border-white {
+  border: 1px;
+  color: white;
+}
+

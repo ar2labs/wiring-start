@@ -23,3 +23,6 @@ $route->get('/book', [IndexController::class, 'book'])
 
 $route->get('/info', [IndexController::class, 'info'])
     ->setName('info');
+
+$route->get('/test', [IndexController::class, 'test'])
+    ->setName('test');
