@@ -54,6 +54,12 @@ function execute() {
         case 'DEL':
             del(http, url);
             break;
+        case 'PUT':
+            put(http, url, data);
+            break;
+        case 'PATCH':
+            patch(http, url, data);
+            break;
         default:
             alert('Please, select a method type.');
     }
@@ -82,6 +88,18 @@ function del(http, url) {
     http.open("DELETE", url);
     http.setRequestHeader('Content-type', contentType);
     http.send();
+}
+
+function put(http, url, data) {
+    http.open("PUT", url);
+    http.setRequestHeader('Content-type', contentType);
+    http.send(data);
+}
+
+function patch(http, url, data) {
+    http.open("PATCH", url);
+    http.setRequestHeader('Content-type', contentType);
+    http.send(data);
 }
 
 function result(http) {
