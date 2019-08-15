@@ -17,8 +17,8 @@ $builder = new DI\ContainerBuilder();
 $builder->useAnnotations(false);
 $builder->useAutowiring(true);
 
-// Check enviroment isn't local
-if (getenv('APP_ENV') !== 'local') {
+// Check cache is enabled
+if (env('APP_CACHE')) {
     // Set cache provider
     $builder->enableCompilation(ROOT_PATH . '/storage/cache');
 }
