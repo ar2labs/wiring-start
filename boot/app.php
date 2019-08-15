@@ -17,8 +17,8 @@ $builder = new DI\ContainerBuilder();
 $builder->useAnnotations(false);
 $builder->useAutowiring(true);
 
-// Check enviroment isn't local
-if (getenv('APP_ENV') !== 'local') {
+// Check cache is enabled
+if (env('APP_CACHE')) {
     // Set cache provider
     $builder->enableCompilation(ROOT_PATH . '/storage/cache');
 }
@@ -56,13 +56,17 @@ $response = new Response();
 // Create application
 $app = new Application($container, $request, $response);
 
-/** @var \League\Route\RouteCollection $route */
+/** @var RouterInterface $route */
 $route = $container->get(RouterInterface::class);
 
+// Dispatches against the provided HTTP method and URI
+$dispatcher = $route->dispatch($request);
+
+// Set your preferred emitter, this is optional
 $emitter = null;
 
 // Adding global middlewares
-$app->addRouterMiddleware(new RouterMiddleware($route))
+$app->addRouterMiddleware(new RouterMiddleware($dispatcher))
     ->addMiddleware(new SessionMiddleware, 'session')
     ->addEmitterMiddleware(new EmitterMiddleware($emitter));
 

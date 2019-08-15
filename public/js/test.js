@@ -2,14 +2,13 @@ const contentType = "application/json;charset=utf-8";
 
 window.onload = init();
 
-//INIT
+// Init
 function init() {
     updateInput();
 }
 
 
-
-//CONTROL INPUT
+// Input control
 function updateInput() {
     let select = document.getElementById("method");
     let method = select.options[select.selectedIndex].value;
@@ -23,19 +22,20 @@ function updateInput() {
 function checkValidations() {
     let url = document.getElementById("url").value;
 
-    if  ("" === url.trim()) {
-        alert("Please, enter a url.")
+
+    if ("" === url.trim()) {
+        alert("Please, enter a URL.")
         return true;
     }
-       
+
     return false;
 }
 
-
-//CALL API
+// Calling API
 function execute() {
 
-    if (checkValidations()) return;
+    if (checkValidations())
+        return;
 
     let http = new XMLHttpRequest();
     let url = document.getElementById("url").value;
@@ -44,21 +44,15 @@ function execute() {
     let data = document.getElementById("input").value;
 
 
-    switch(method) {
+    switch (method) {
         case 'GET':
             get(http, url);
             break;
-        case 'POST': 
-            post(http, url, data);   
+        case 'POST':
+            post(http, url, data);
             break;
         case 'DEL':
             del(http, url);
-            break;
-        case 'PUT':
-            put(http, url, data);
-            break;
-        case 'PATCH':
-            patch(http, url, data);
             break;
         default:
             alert('Please, select a method type.');
@@ -70,39 +64,23 @@ function execute() {
 }
 
 function post(http, url, data) {
-    
     http.open("POST", url);
     http.setRequestHeader('Content-type', contentType);
     http.send(data);
 }
 
 function get(http, url) {
-
     http.open("GET", url);
     http.setRequestHeader('Content-type', contentType);
     http.send();
 }
 
 function del(http, url) {
-
     http.open("DELETE", url);
     http.setRequestHeader('Content-type', contentType);
     http.send();
 }
 
-function put(http, url, data) {
-    http.open("PUT", url);
-    http.setRequestHeader('Content-type', contentType);
-    http.send(data);
-}
-
-function patch(http, url, data) {
-    http.open("PATCH", url);
-    http.setRequestHeader('Content-type', contentType);
-    http.send(data);
-}
-
 function result(http) {
     document.getElementById("output").value = http.responseText;
 }
-
