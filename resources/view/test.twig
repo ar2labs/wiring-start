@@ -1,87 +1,87 @@
 {% extends 'templates/layout.twig' %}
 {% block style %}
-    <link rel="stylesheet" href="{{ '/css/test.css' }}">
+  <link rel="stylesheet" href="{{ '/css/test.css' }}">
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="center">
-            <h1>Wiring micro framework</h1>
-
-            <div>
-                <a href="https://travis-ci.org/ar2labs/wiring" alt="Travis CI">
-                <img src="https://travis-ci.org/ar2labs/wiring.svg?branch=master"></a>
-                <a href="https://packagist.org/packages/ar2labs/wiring">
-                <img src="https://poser.pugx.org/ar2labs/wiring/d/total.svg"></a>
-                <a href="https://packagist.org/packages/ar2labs/wiring">
-                <img src="https://poser.pugx.org/ar2labs/wiring/v/stable.svg"></a>
-            </div>
-        </div>
-        <div class="form">
-            <fieldset>
-                <legend>A simple interface for you to test your API </legend>
-                    <label>URL <span>*</span></label> <br />
-                    <div class="row w-100">
-                        <div class="flex-10">
-                            <input id="url" name="url" class="w-100" type="text" />
-                        </div>
-                        <div class="flex-2 action-select" >
-                            <select id="method" name="method" class="bk-color-white w-100" onchange="updateInput()" >
-                                <option value="GET" selected >GET</option>
-                                <option value="POST" >POST</option>
-                                <option value="PUT" >PUT</option>
-                                <option value="PATCH" >PATCH</option>
-                                <option value="DEL" >DELETE</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row w-100">
-                        <div class="flex-1 pdg-r">
-                            <div class="row-column w-100">
-                                <label>Input (JSON)</label>
-                                <textarea id="input" name="input" rows="15" ></textarea>
-                            </div>
-                        </div>
-                        <div class="flex-1 pdg-l">
-                            <div class="row-column w-100">
-                                <label>Output</label>
-                                <textarea id="output" name="output" rows="15" ></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                     <div class="row w-100">
-                        <div class="flex-1">
-                            <button class="w-100" type="submit"  onclick="execute()" >Executar</button>
-                        </div>
-                     </div>
-            </fieldset>
-        </div>       
+  <div class="container">
+    <div class="center">
+      <h1>Wiring micro framework</h1>
+      <div>
+        <a alt="Travis CI" href="https://travis-ci.org/ar2labs/wiring">
+          <img src="https://travis-ci.org/ar2labs/wiring.svg?branch=master"></a>
+        <a href="https://packagist.org/packages/ar2labs/wiring">
+          <img src="https://poser.pugx.org/ar2labs/wiring/d/total.svg"></a>
+        <a href="https://packagist.org/packages/ar2labs/wiring">
+          <img src="https://poser.pugx.org/ar2labs/wiring/v/stable.svg"></a>
+      </div>
     </div>
-    <footer class="light center">
-        <div>
-          <a href="/" title="About">Back to home</a>
+    <div class="form">
+      <fieldset>
+        <legend>A simple interface for you to test your API
+        </legend>
+        <label>URL
+          <span>*</span>
+        </label>
+        <br/>
+        <div class="row w-100">
+          <div class="flex-10">
+            <input class="w-100" id="url" name="url" type="text"/>
+          </div>
+          <div class="flex-2 action-select">
+            <select class="bk-color-white w-100" id="method" name="method" onchange="updateInput()">
+              <option selected value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+              <option value="DEL">DELETE</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <p>
-            <a href="https://packagist.org/packages/ar2labs/wiring">
-              <img src="https://poser.pugx.org/ar2labs/wiring/license.svg"></a>
-          </p>
+        <br/>
+        <div class="row w-100">
+          <div class="flex-1 pdg-r">
+            <div class="row-column w-100">
+              <label>Input (JSON)</label>
+              <textarea id="input" name="input" rows="15"></textarea>
+            </div>
+          </div>
+          <div class="flex-1 pdg-l">
+            <div class="row-column w-100">
+              <label>Output</label>
+              <textarea id="output" name="output" rows="15"></textarea>
+            </div>
+          </div>
         </div>
-        <div>
-          <p>©
-            {{ "now"|date("Y") }},
-            <a href="https://github.com/ar2labs" target="_blank">AR2 Labs</a>
-            - Open Source Community.
-          </p>
+        <br/>
+        <div class="row w-100">
+          <div class="flex-1">
+            <button class="w-100" onclick="execute()" type="submit">Executar</button>
+          </div>
         </div>
-    </footer>
+      </fieldset>
+    </div>
+  </div>
+  <footer class="light center">
+    <div>
+      <a href="/" title="About">Back to home</a>
+    </div>
+    <div>
+      <p>
+        <a href="https://packagist.org/packages/ar2labs/wiring">
+          <img src="https://poser.pugx.org/ar2labs/wiring/license.svg"></a>
+      </p>
+    </div>
+    <div>
+      <p>©
+        {{ "now"|date("Y") }},
+        <a href="https://github.com/ar2labs" target="_blank">AR2 Labs</a>
+        - Open Source Community.
+      </p>
+    </div>
+  </footer>
 {% endblock %}
 
 {% block script %}
-    <script src="{{ '/js/test.js' }}"></script>
+  <script src="{{ '/js/test.js' }}"></script>
 {% endblock %}
-
-
-
