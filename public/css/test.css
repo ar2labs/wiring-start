@@ -44,3 +44,37 @@
   color: white;
 }
 
+
+@media only screen and (max-width: 580px) {
+
+  .pdg-r {
+    padding-right: 0em;
+  }
+
+  .pdg-l {
+    padding-left: 0em;
+  }
+
+  .flex-2 {
+    display: flex;
+    flex: 1;
+  }
+  
+  .flex-10 {
+    display: flex;
+    flex: 1;
+  }
+
+  .row {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .action-select {
+    padding-left: 0em;
+    padding-top: 1em;
+  }
+
+}
