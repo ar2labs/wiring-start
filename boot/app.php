@@ -56,17 +56,14 @@ $response = new Response();
 // Create application
 $app = new Application($container, $request, $response);
 
-/** @var RouterInterface $route */
+/** @var \App\Provider\Router $route */
 $route = $container->get(RouterInterface::class);
-
-// Dispatches against the provided HTTP method and URI
-$dispatcher = $route->dispatch($request);
 
 // Set your preferred emitter, this is optional
 $emitter = null;
 
 // Adding global middlewares
-$app->addRouterMiddleware(new RouterMiddleware($dispatcher))
+$app->addRouterMiddleware(new RouterMiddleware($route))
     ->addMiddleware(new SessionMiddleware, 'session')
     ->addEmitterMiddleware(new EmitterMiddleware($emitter));
 

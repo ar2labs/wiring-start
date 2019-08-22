@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Provider\Auth;
 use App\Provider\Eloquent;
+use App\Provider\Router;
 
-use League\Route\Router;
 use League\Route\Strategy\ApplicationStrategy;
 
 use Monolog\Formatter\LineFormatter;
@@ -54,8 +54,13 @@ return [
         $strategy = (new ApplicationStrategy);
         $strategy->setContainer($container);
 
-        $route = (new Router)->setStrategy($strategy);
+        // Create router
+        $route = new Router();
 
+        // Set strategy
+        $route->setStrategy($strategy);
+
+        // Loader routes path
         $loader = new Loader();
         $loader->addPath(ROOT_PATH . '/routes');
 
