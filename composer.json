@@ -19,7 +19,7 @@
         "symfony/console": "^4.3",
         "twig/twig": "^2.11",
         "vlucas/phpdotenv": "^3.4",
-        "zendframework/zend-diactoros": "^2.1",
+        "zendframework/zend-diactoros": "^2.1"
     },
     "autoload": {
         "psr-4": {
