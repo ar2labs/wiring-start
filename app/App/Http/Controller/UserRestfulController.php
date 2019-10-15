@@ -17,7 +17,7 @@ class UserRestfulController extends AbstractRestfulController
      *
      * @param ServerRequestInterface $request
      *
-     * @return ResponseInterface $response
+     * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request): ResponseInterface
     {
@@ -35,33 +35,34 @@ class UserRestfulController extends AbstractRestfulController
      *
      * @param ServerRequestInterface $request
      *
-     * @return ResponseInterface $response
+     * @return ResponseInterface
      */
     public function create(ServerRequestInterface $request): ResponseInterface
     {
-        $input = json_decode($request->getBody()->getContents(), true);
+        $input = (object) json_decode($request->getBody()->getContents(), true);
 
-        if (!isset($input['username'])) {
+        if (!isset($input->username)) {
             throw new Exception('The username attribute is required.');
         }
 
-        if (!isset($input['email'])) {
+        if (!isset($input->email)) {
             throw new Exception('The email attribute is required.');
         }
 
-        if (!isset($input['password'])) {
+        if (!isset($input->password)) {
             throw new Exception('The password attribute is required.');
         }
 
-        if (!isset($input['active'])) {
+        if (!isset($input->active)) {
             throw new Exception('The active attribute is required.');
         }
 
+        /** @var mixed $user */
         $user = User::create([
-            'username' => $input['username'],
-            'email' => $input['email'],
-            'active' => $input['active'],
-            'password' => $input['password'],
+            'username' => $input->username,
+            'email' => $input->email,
+            'active' => $input->active,
+            'password' => $input->password,
         ]);
 
         if (!$user) {
@@ -82,12 +83,13 @@ class UserRestfulController extends AbstractRestfulController
      * @param ServerRequestInterface $request
      * @param array $args
      *
-     * @return ResponseInterface $response
+     * @return ResponseInterface
      */
     public function read(
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
+        /** @var mixed $user */
         $user = User::find($args['id']);
 
         if (!$user) {
@@ -108,23 +110,36 @@ class UserRestfulController extends AbstractRestfulController
      * @param ServerRequestInterface $request
      * @param array $args
      *
-     * @return ResponseInterface $response
+     * @return ResponseInterface
      */
     public function update(
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-        $input = json_decode($request->getBody()->getContents(), true);
+        $input = (object) json_decode($request->getBody()->getContents(), true);
+
+        /** @var mixed $user */
         $user = User::find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
         } else {
-            // Set fields
-            $user['username'] = $input['username'] ?? $user['username'];
-            $user['email'] = $input['email'] ?? $user['email'];
-            $user['active'] = $input['active'] ?? $user['active'];
-            $user['password'] = $input['password'] ?? $user['password'];
+            // Check and set fields
+            if (!isset($input->username)) {
+                $user->username = $input->username;
+            }
+
+            if (!isset($input->email)) {
+                $user->email = $input->email;
+            }
+
+            if (!isset($input->password)) {
+                $user->password = $input->password;
+            }
+
+            if (!isset($input->active)) {
+                $user->active = $input->active;
+            }
 
             if ($user->save()) {
                 $data = $this->success('Ok', $user);
@@ -145,22 +160,36 @@ class UserRestfulController extends AbstractRestfulController
      * @param ServerRequestInterface $request
      * @param array $args
      *
-     * @return ResponseInterface $response
+     * @return ResponseInterface
      */
     public function modify(
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-        $input = json_decode($request->getBody()->getContents(), true);
+        $input = (object) json_decode($request->getBody()->getContents(), true);
+
+        /** @var mixed $user */
         $user = User::find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
         } else {
-            $user['username'] = $input['username'] ?? $user['username'];
-            $user['email'] = $input['email'] ?? $user['email'];
-            $user['active'] = $input['active'] ?? $user['active'];
-            $user['password'] = $input['password'] ?? $user['password'];
+            // Check and set fields
+            if (!isset($input->username)) {
+                $user->username = $input->username;
+            }
+
+            if (!isset($input->email)) {
+                $user->email = $input->email;
+            }
+
+            if (!isset($input->password)) {
+                $user->password = $input->password;
+            }
+
+            if (!isset($input->active)) {
+                $user->active = $input->active;
+            }
 
             if ($user->save()) {
                 $data = $this->success('Ok', $user);
@@ -187,12 +216,15 @@ class UserRestfulController extends AbstractRestfulController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
+        /** @var mixed $user */
         $user = User::find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
         } else {
-            $user['active'] = false;
+            // Inactive user
+            $user->active = false;
+
             if ($user->save()) {
                 $data = $this->success('Ok', $user);
             } else {

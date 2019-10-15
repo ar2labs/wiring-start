@@ -9,21 +9,17 @@ use App\Model\About;
 use App\Model\Book;
 use App\Model\Log;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Wiring\Http\Controller\AbstractJsonViewController;
 use Wiring\Http\Helpers\Info;
-use Zend\Diactoros\Response;
 
 class IndexController extends AbstractJsonViewController
 {
     /**
      * Home page action.
      *
-     * @param Request $request
-     *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function home(ServerRequestInterface $request): ResponseInterface
+    public function home(): ResponseInterface
     {
         return $this
             ->view()
@@ -36,12 +32,9 @@ class IndexController extends AbstractJsonViewController
     /**
      * User model example.
      *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function user(ServerRequestInterface $request): ResponseInterface
+    public function user(): ResponseInterface
     {
         /** @var \App\Model\User $users */
         $users = (new user())->all();
@@ -55,12 +48,9 @@ class IndexController extends AbstractJsonViewController
     /**
      * About model example.
      *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Reponse
+     * @return ResponseInterface
      */
-    public function about(ServerRequestInterface $request): ResponseInterface
+    public function about(): ResponseInterface
     {
         /** @var \App\Model\About $about */
         $about = $this->get(About::class);
@@ -75,12 +65,9 @@ class IndexController extends AbstractJsonViewController
     /**
      * Book model example.
      *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function book(ServerRequestInterface $request): ResponseInterface
+    public function book(): ResponseInterface
     {
         /** @var \App\Model\Book $book */
         $book = $this
@@ -101,42 +88,15 @@ class IndexController extends AbstractJsonViewController
     /**
      * Query builder logs example.
      *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function logs(ServerRequestInterface $request): ResponseInterface
+    public function logs(): ResponseInterface
     {
-        // Get database connection
-        if (env('DB_CONNECTION') === 'doctrine') {
-            /** @var \Doctrine\DBAL\Connection $dbh */
-            $dbh = $this->database();
-            $id = 1;
+        $data = Log::all();
 
-            $query = $dbh->createQueryBuilder();
-            $query
-                ->select(
-                    'u.id',
-                    'u.username',
-                    'u.email',
-                    'l.feedback',
-                    'l.created_at'
-                )
-                ->from('users', 'u')
-                ->innerJoin('u', 'logs', 'l', 'u.id = l.user_id')
-                ->where('u.id = :id')
-                ->setParameter(':id', $id)
-                ->orderBy('u.username', 'ASC');
-
-            $sth = $query->execute();
-            $data = $sth->fetchAll();
-        } else {
-            $data = Log::all();
-
-            foreach ($data as $log) {
-                $log->user;
-            }
+        /** @var mixed $log */
+        foreach ($data as $log) {
+            $log->user;
         }
 
         return $this
@@ -148,17 +108,16 @@ class IndexController extends AbstractJsonViewController
     /**
      * Custom PHP info example.
      *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function info(ServerRequestInterface $request): ResponseInterface
+    public function info(): ResponseInterface
     {
+        $info = new Info();
+
         return $this
             ->view()
             ->render('info.twig', [
-                'phpinfo' => Info::phpinfo(),
+                'phpinfo' => $info->phpinfo(),
             ])
             ->to($this->response);
     }
@@ -166,12 +125,9 @@ class IndexController extends AbstractJsonViewController
     /**
      * Test your api page.
      *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Reponse
+     * @return ResponseInterface
      */
-    public function test(ServerRequestInterface $request): ResponseInterface
+    public function test(): ResponseInterface
     {
         return $this
             ->view()

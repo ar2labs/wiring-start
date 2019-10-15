@@ -1,7 +1,7 @@
 <?php
 
 // Define application version
-define('APP_VERSION', '2.1.1');
+define('APP_VERSION', '2.1.9');
 define('ROOT_PATH', dirname(__DIR__));
 define('BOOT_PATH', ROOT_PATH . '/boot');
 

@@ -6,7 +6,6 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wiring\Interfaces\DatabaseInterface;
 
 /**
  * Class Command
@@ -16,17 +15,17 @@ use Wiring\Interfaces\DatabaseInterface;
 abstract class Command extends SymfonyCommand
 {
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface $container
      */
     protected $container;
 
     /**
-     * @var \Symfony\Component\Console\Input\InputInterface
+     * @var InputInterface $input
      */
     private $input;
 
     /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
+     * @var OutputInterface $output
      */
     private $output;
 
@@ -43,49 +42,13 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Load database settings.
-     */
-    protected function database()
-    {
-        // Capsule aims to make configuring the library for usage outside of the
-        // Laravel framework as easy as possible.
-        if (env('DB_CONNECTION') === 'eloquent') {
-            $this->container->get(DatabaseInterface::class)->bootEloquent();
-        }
-    }
-
-    /**
-     * Command settings.
-     */
-    protected function configure()
-    {
-        $this->setName($this->command)->setDescription($this->getDescription());
-        $this->addArguments();
-        $this->addOptions();
-    }
-
-    /**
-     * Command execute.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return mixed
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->input = $input;
-        $this->output = $output;
-
-        return $this->handle($input, $output);
-    }
-
-    /**
      * Set arguments.
      *
-     * @param $name
+     * @param string $name
+     *
      * @return mixed
      */
-    protected function argument($name)
+    protected function argument(string $name)
     {
         return $this->input->getArgument($name);
     }
@@ -93,64 +56,48 @@ abstract class Command extends SymfonyCommand
     /**
      * Set option.
      *
-     * @param $name
+     * @param string $name
+     *
      * @return mixed
      */
-    protected function option($name)
+    protected function option(string $name)
     {
         return $this->input->getOption($name);
     }
 
     /**
-     * Add arguments.
-     */
-    protected function addArguments()
-    {
-        foreach ($this->arguments() as $argument) {
-            $this->addArgument($argument[0], $argument[1], $argument[2]);
-        }
-    }
-
-    /**
-     * Add options.
-     */
-    protected function addOptions()
-    {
-        foreach ($this->options() as $option) {
-            $this->addOption($option[0], $option[1], $option[2], $option[3], $option[4]);
-        }
-    }
-
-    /**
      * Show notification.
      *
-     * @param $value
+     * @param string $message
+     *
      * @return mixed
      */
-    protected function info($value)
+    protected function info(string $message)
     {
-        return $this->output->writeln('<info>' . $value . '</info>');
+        return $this->output->writeln('<info>' . $message . '</info>');
     }
 
     /**
      * Show comment.
      *
-     * @param $value
+     * @param string $message
+     *
      * @return mixed
      */
-    protected function comment($value)
+    protected function comment(string $message)
     {
-        return $this->output->writeln('<comment>' . $value . '</comment>');
+        return $this->output->writeln('<comment>' . $message . '</comment>');
     }
 
     /**
      * Show error.
      *
-     * @param $value
+     * @param string $message
+     *
      * @return mixed
      */
-    protected function error($value)
+    protected function error(string $message)
     {
-        return $this->output->writeln('<error>' . $value . '</error>');
+        return $this->output->writeln('<error>' . $message . '</error>');
     }
 }
