@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class User
@@ -41,10 +42,10 @@ class User extends Model
     /**
      * Update remember credentials.
      *
-     * @param $identifier
-     * @param $token
+     * @param string $identifier
+     * @param string $token
      */
-    public function updateRememberCredentials($identifier, $token)
+    public function updateRememberCredentials(string $identifier, string $token)
     {
         $this->update([
             'remember_identifier' => $identifier,
@@ -63,7 +64,7 @@ class User extends Model
     /**
      * Get user role.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function userRole()
     {
@@ -73,12 +74,12 @@ class User extends Model
     /**
      * Check has role.
      *
-     * @param $role
+     * @param string $role
      * @return bool
      */
-    public function hasRole($role)
+    public function hasRole(string $role)
     {
-        if (!$this->userRole()) {
+        if (!($this->userRole() instanceof HasOne)) {
             return false;
         }
 

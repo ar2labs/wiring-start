@@ -42,24 +42,27 @@ class ServeCommand extends Command
      *
      * @param InputInterface $input
      * @param OutputInterface $output
-     *
-     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->checkPhpVersion();
 
-        chdir(ROOT_PATH);
+        $path = getenv('APP_PATH');
+
+        chdir(\is_string($path) ? $path : '../../../');
 
         $host = $input->getOption('host');
         $port = $input->getOption('port');
 
+        $host = \is_string($host) ? $host : 'localhost';
+        $port = \is_string($port) ? $port : '8080';
+
         $mesg = '<info>PHP built-in Web Server started on' .
-            "</info> <comment>http://{$host}:{$port}</comment>";
+        "</info> <comment>http://{$host}:{$port}</comment>";
 
         $output->writeln($mesg);
 
-        $public = ROOT_PATH . '/public';
+        $public = getenv('APP_PATH') . '/public';
 
         passthru('"' . PHP_BINARY . '"' .
             " -S {$host}:{$port} -t \"{$public}\"");

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Provider\Auth;
 use App\Provider\Eloquent;
 use App\Provider\Router;
 
@@ -12,6 +11,8 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Noodlehaus\Config;
+
+use PHPMailer\PHPMailer\PHPMailer;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -27,7 +28,6 @@ use Wiring\Http\Helpers\Loader;
 use Wiring\Http\Helpers\Mailer;
 use Wiring\Http\Helpers\Session;
 use Wiring\Http\Exception\ErrorHandler;
-use Wiring\Interfaces\AuthInterface;
 use Wiring\Interfaces\ConfigInterface;
 use Wiring\Interfaces\ConsoleInterface;
 use Wiring\Interfaces\DatabaseInterface;
@@ -115,8 +115,6 @@ return [
         return $view;
     }),
 
-    AuthInterface::class => DI\create(Auth::class),
-
     ConsoleInterface::class => DI\create(Console::class),
 
     SessionInterface::class => DI\create(Session::class),
@@ -142,7 +140,7 @@ return [
         $config = $container->get(ConfigInterface::class);
 
         // Create e-mail transport
-        $mailer = new \PHPMailer;
+        $mailer = new PHPMailer(false);
         $mailer->Host = $config->get('mail.host');
         $mailer->Port = $config->get('mail.port');
         $mailer->Username = $config->get('mail.username');
@@ -150,7 +148,7 @@ return [
         $mailer->FromName = $config->get('mail.from.name');
         $mailer->From = $config->get('mail.from');
         $mailer->SMTPAuth = true;
-        $mailer->SMTPSecure = false;
+        $mailer->SMTPSecure = '';
         $mailer->isSMTP();
         $mailer->isHTML(true);
 
@@ -175,8 +173,8 @@ return [
 
     ErrorHandlerInterface::class => function (ContainerInterface $container) {
         return function (
-            ServerRequestInterface $request = null,
-            ResponseInterface $response = null,
+            ServerRequestInterface $request,
+            ResponseInterface $response,
             Throwable $exception
         ) use ($container) {
 
@@ -226,13 +224,8 @@ return [
                     break;
                 case 405:
                     // Define allow methods
-                    $allow = [];
-                    if (is_array($exception)) {
-                        $allow = implode(', ', $exception);
-                    }
-
                     return $view
-                        ->render('error/error405.twig', ['allow' => $allow])
+                        ->render('error/error405.twig', ['allow' => []])
                         ->to($response, 405);
 
                     break;

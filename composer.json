@@ -19,12 +19,31 @@
         "symfony/console": "^4.3",
         "twig/twig": "^2.11",
         "vlucas/phpdotenv": "^3.4",
-        "zendframework/zend-diactoros": "^2.1"
+        "zendframework/zend-diactoros": "^2.1",
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan-shim": "^0.11",
+        "friendsofphp/php-cs-fixer": "^2.15"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/App/",
             "Console\\": "app/Console/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wiring\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "@php-cs-fixer",
+            "@phpunit",
+            "@phpstan"
+        ],
+        "php-cs-fixer": "php-cs-fixer fix --config=php_cs.dist --no-interaction",
+        "phpstan": "phpstan analyse app boot config --level=max --autoload-file=./public/helpers.php --no-progress --ansi"
     }
 }
