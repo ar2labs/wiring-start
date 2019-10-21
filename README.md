@@ -1,6 +1,8 @@
 Wiring Start
 ============
 
+[![Build Status](https://travis-ci.org/ar2labs/wiring-start.svg?branch=master)](https://travis-ci.org/ar2labs/wiring-start)
+
 Wiring is a PHP micro framework core with Interoperability (PSRs).
 
 ## Quick start
