@@ -28,4 +28,4 @@ before_script:
 
 script:
   - vendor/bin/php-cs-fixer fix --config=php_cs.dist --no-interaction
-  - vendor/bin/phpstan analyse app boot config --level=max --autoload-file=./public/helpers.php --no-progress --ansi
+  - vendor/bin/phpstan analyse app boot config --level=max --autoload-file=./public/phpstan.php --no-progress --ansi
