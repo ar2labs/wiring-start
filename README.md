@@ -2,6 +2,7 @@ Wiring Start
 ============
 
 [![Build Status](https://travis-ci.org/ar2labs/wiring-start.svg?branch=master)](https://travis-ci.org/ar2labs/wiring-start)
+<a href="https://github.com/ar2labs/wiring/blob/master/LICENSE.md"><img src="https://poser.pugx.org/ar2labs/wiring/license.svg" alt="License"></a>
 
 Wiring is a PHP micro framework core with Interoperability (PSRs).
 
@@ -74,4 +75,4 @@ PHP Extension Requirements:
 
 ## Copyright and license
 
-Code and documentation copyright (c) 2019, Code released under the BSD-3-Clause license.
+Code and documentation copyright (c) 2019, Code released under the <a href="https://github.com/ar2labs/wiring/blob/master/LICENSE.md">BSD-3-Clause license</a>.
