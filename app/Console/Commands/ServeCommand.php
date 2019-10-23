@@ -45,8 +45,6 @@ class ServeCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->checkPhpVersion();
-
         $path = getenv('APP_PATH');
 
         chdir(\is_string($path) ? $path : '../../../');
@@ -55,10 +53,10 @@ class ServeCommand extends Command
         $port = $input->getOption('port');
 
         $host = \is_string($host) ? $host : 'localhost';
-        $port = \is_string($port) ? $port : '8080';
+        $port = \is_string($port) ? $port : '8000';
 
         $mesg = '<info>PHP built-in Web Server started on' .
-        "</info> <comment>http://{$host}:{$port}</comment>";
+            "</info> <comment>http://{$host}:{$port}</comment>";
 
         $output->writeln($mesg);
 
@@ -66,21 +64,5 @@ class ServeCommand extends Command
 
         passthru('"' . PHP_BINARY . '"' .
             " -S {$host}:{$port} -t \"{$public}\"");
-    }
-
-    /**
-     * Check the current PHP version is >= 5.4.
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    protected function checkPhpVersion()
-    {
-        if (version_compare(PHP_VERSION, '7.1.0', '<')) {
-            $mesg = 'This PHP binary is not version 7.1 or greater.';
-
-            throw new \Exception($mesg);
-        }
     }
 }

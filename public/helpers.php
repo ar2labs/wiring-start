@@ -1,22 +1,31 @@
 <?php
 
 // Define application version
-define('APP_VERSION', '2.1.9');
+define('APP_VERSION', '2.2.1');
+define('PHP_MIN_VER', '7.1.0');
 define('ROOT_PATH', dirname(__DIR__));
 define('BOOT_PATH', ROOT_PATH . '/boot');
 
+// Change directory
 chdir(ROOT_PATH);
+
+// Check PHP version
+if (version_compare(PHP_VERSION, PHP_MIN_VER, '<')) {
+    throw new \ParseError('This PHP binary is not version ' .
+        PHP_MIN_VER . ' or greater.');
+    die;
+}
 
 // Try to load autoload composer
 if (!@include_once(dirname(__DIR__) . '/vendor/autoload.php')) {
     throw new \ParseError('Unable to load file autoload.php at ' .
-        dirname(__DIR__) . '/vendor/');
+        ROOT_PATH . '/vendor/');
     die;
 }
 
 if (!glob(dirname(__DIR__) . '/.env')) {
     throw new \ParseError('Unable to load file .env at ' .
-        dirname(__DIR__) . '/');
+        ROOT_PATH . '/');
     die;
 }
 
