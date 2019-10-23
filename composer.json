@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "ar2labs/wiring": "^2.1",
+        "ar2labs/wiring": "^2.2",
         "hassankhan/config": "^2.0",
         "illuminate/database": "^5.8",
         "league/route": "^4.3",
@@ -21,10 +21,6 @@
         "vlucas/phpdotenv": "^3.4",
         "zendframework/zend-diactoros": "^2.1",
         "phpmailer/phpmailer": "^6.1"
-    },
-    "require-dev": {
-        "phpstan/phpstan-shim": "^0.11",
-        "friendsofphp/php-cs-fixer": "^2.15"
     },
     "autoload": {
         "psr-4": {
@@ -39,11 +35,9 @@
     },
     "scripts": {
         "test": [
-            "@php-cs-fixer",
-            "@phpunit",
             "@phpstan"
         ],
-        "php-cs-fixer": "php-cs-fixer fix --config=php_cs.dist --no-interaction",
+        "php-cs-fixer": "php-cs-fixer fix --config=php_cs.dist --ansi --no-interaction",
         "phpstan": "phpstan analyse app boot config --level=max --autoload-file=./public/helpers.php --no-progress --ansi"
     }
 }
