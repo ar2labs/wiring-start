@@ -23,28 +23,32 @@ if (!@include_once(dirname(__DIR__) . '/vendor/autoload.php')) {
     die;
 }
 
-if (!glob(dirname(__DIR__) . '/.env')) {
-    throw new \ParseError('Unable to load file .env at ' .
-        ROOT_PATH . '/');
-    die;
-}
+// Check development enviroment
+if (getenv('COMPOSER_ARGS') != '--dev') {
+    // Check dotenv file
+    if (!glob(dirname(__DIR__) . '/.env')) {
+        throw new \ParseError('Unable to load file .env at ' .
+            ROOT_PATH . '/');
+        die;
+    }
 
-// Load dotenv
-$dotenv = Dotenv\Dotenv::create(ROOT_PATH);
-$dotenv->load();
+    // Load dotenv
+    $dotenv = Dotenv\Dotenv::create(ROOT_PATH);
+    $dotenv->load();
 
-if (!function_exists('env')) {
-    // Custom dotenv value default
-    function env($key, $default = null)
-    {
-        // Get dotenv value
-        $value = getenv($key);
+    if (!function_exists('env')) {
+        // Custom dotenv value default
+        function env($key, $default = null)
+        {
+            // Get dotenv value
+            $value = getenv($key);
 
-        // Check value is false
-        if ($value === false) {
-            return $default;
+            // Check value is false
+            if ($value === false) {
+                return $default;
+            }
+
+            return $value;
         }
-
-        return $value;
     }
 }
