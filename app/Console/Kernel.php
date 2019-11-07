@@ -27,6 +27,16 @@ class Kernel
      */
     public function getCommands(): array
     {
-        return array_merge($this->commands, $this->defaultCommands);
+        return $this->commands;
+    }
+
+    /**
+     * Get default commands array.
+     *
+     * @return array
+     */
+    public function getDefaultCommands(): array
+    {
+        return $this->defaultCommands;
     }
 }

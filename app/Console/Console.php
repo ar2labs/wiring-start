@@ -34,17 +34,11 @@ class Console extends Application
     public function boot(Kernel $kernel)
     {
         foreach ($kernel->getCommands() as $command) {
-            $this->add(new $command($this->getContainer()));
+            $this->add(new $command());
         }
-    }
 
-    /**
-     * Get Slim Framework application.
-     *
-     * @return \Psr\Container\ContainerInterface
-     */
-    protected function getContainer()
-    {
-        return $this->container;
+        foreach ($kernel->getDefaultCommands() as $command) {
+            $this->add(new $command($this->container));
+        }
     }
 }
