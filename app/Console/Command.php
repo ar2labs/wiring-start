@@ -6,6 +6,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wiring\Traits\ContainerAwareTrait;
 
 /**
  * Class Command
@@ -14,10 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class Command extends SymfonyCommand
 {
-    /**
-     * @var ContainerInterface $container
-     */
-    protected $container;
+    use ContainerAwareTrait;
 
     /**
      * @var InputInterface $input
@@ -38,7 +36,7 @@ abstract class Command extends SymfonyCommand
     {
         parent::__construct();
 
-        $this->container = $container;
+        $this->setContainer($container);
     }
 
     /**
