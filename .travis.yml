@@ -3,9 +3,9 @@ sudo: false
 language: php
 
 php:
-  - '7.1'
   - '7.2'
   - '7.3'
+  - '7.4'
 
 cache:
   directories:
@@ -24,7 +24,7 @@ addons:
 
 before_script:
   - composer self-update
-  - composer require --dev friendsofphp/php-cs-fixer:^2.15 --no-interaction --no-suggest --no-progress
+  - composer require --dev friendsofphp/php-cs-fixer:^2.16 --no-interaction --no-suggest --no-progress
   - composer require --dev phpstan/phpstan-shim:^0.11 --no-interaction --no-suggest --no-progress
   - composer install --no-interaction --no-suggest --no-progress
 
