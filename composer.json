@@ -10,27 +10,22 @@
         }
     ],
     "require": {
-        "ar2labs/wiring": "^2.2",
-        "hassankhan/config": "^2.0",
-        "illuminate/database": "^5.8",
-        "league/route": "^4.3",
-        "monolog/monolog": "^1.24",
-        "php-di/php-di": "^6.0",
-        "symfony/console": "^4.3",
-        "twig/twig": "^2.11",
-        "vlucas/phpdotenv": "^3.4",
-        "zendframework/zend-diactoros": "^2.1",
+        "ar2labs/wiring": "^2.3",
+        "hassankhan/config": "^2.1",
+        "illuminate/database": "^7.21",
+        "league/route": "^4.5",
+        "monolog/monolog": "^1.25",
+        "php-di/php-di": "^6.2",
+        "symfony/console": "^5.1",
+        "twig/twig": "^3.0",
+        "vlucas/phpdotenv": "^4.1.8",
+        "laminas/laminas-diactoros": "^2.3",
         "phpmailer/phpmailer": "^6.1"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/App/",
             "Console\\": "app/Console/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Wiring\\Tests\\": "tests/"
         }
     },
     "scripts": {

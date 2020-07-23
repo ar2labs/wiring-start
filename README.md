@@ -58,9 +58,9 @@ Wiring is a PHP micro framework core with Interoperability (PSRs).
 
 The following versions of PHP are supported by this version.
 
-* PHP 7.1
 * PHP 7.2
 * PHP 7.3
+* PHP 7.4
 
 PHP Extension Requirements:
 
@@ -75,4 +75,4 @@ PHP Extension Requirements:
 
 ## Copyright and license
 
-Code and documentation copyright (c) 2019, Code released under the <a href="https://github.com/ar2labs/wiring/blob/master/LICENSE.md">BSD-3-Clause license</a>.
+Code and documentation copyright (c) 2020, Code released under the <a href="https://github.com/ar2labs/wiring/blob/master/LICENSE.md">BSD-3-Clause license</a>.

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Provider;
 
 use Psr\Container\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class TwigExtension extends \Twig_Extension
+class TwigExtension extends AbstractExtension
 {
     /**
      * @var ContainerInterface
@@ -31,10 +33,10 @@ class TwigExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('asset', [$this, 'asset']),
-            new \Twig_SimpleFunction('env', [$this, 'env']),
-            new \Twig_SimpleFunction('getenv', [$this, 'env']),
-            new \Twig_SimpleFunction('base_url', [$this, 'path']),
+            new TwigFunction('asset', [$this, 'asset']),
+            new TwigFunction('env', [$this, 'env']),
+            new TwigFunction('getenv', [$this, 'env']),
+            new TwigFunction('base_url', [$this, 'path']),
         ];
     }
 
