@@ -1,8 +1,8 @@
 <?php
 
 // Define application version
-define('APP_VERSION', '2.2.5');
-define('PHP_MIN_VER', '7.1.0');
+define('APP_VERSION', '2.3.3');
+define('PHP_MIN_VER', '7.2.0');
 define('ROOT_PATH', dirname(__DIR__));
 define('BOOT_PATH', ROOT_PATH . '/boot');
 
@@ -33,7 +33,7 @@ if (getenv('COMPOSER_ARGS') != '--dev') {
     }
 
     // Load dotenv
-    $dotenv = Dotenv\Dotenv::create(ROOT_PATH);
+    $dotenv = Dotenv\Dotenv::createImmutable(ROOT_PATH);
     $dotenv->load();
 
     if (!function_exists('env')) {

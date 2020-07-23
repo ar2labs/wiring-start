@@ -60,9 +60,11 @@ class ServeCommand extends Command
 
         $output->writeln($mesg);
 
-        $public = getenv('APP_PATH') . '/public';
+        $public = $path . '/public';
 
         passthru('"' . PHP_BINARY . '"' .
             " -S {$host}:{$port} -t \"{$public}\"");
+
+        return 0;
     }
 }
