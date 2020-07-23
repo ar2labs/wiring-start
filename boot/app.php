@@ -3,11 +3,11 @@
 use App\Http\Middleware\SessionMiddleware;
 
 use Wiring\Application;
+use Wiring\Http\Middleware\EmitterMiddleware;
+use Wiring\Http\Middleware\RouterMiddleware;
 use Wiring\Interfaces\ConfigInterface;
 use Wiring\Interfaces\DatabaseInterface;
 use Wiring\Interfaces\RouterInterface;
-use Wiring\Http\Middleware\EmitterMiddleware;
-use Wiring\Http\Middleware\RouterMiddleware;
 
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
@@ -64,7 +64,7 @@ $emitter = null;
 
 // Adding global middlewares
 $app->addRouterMiddleware(new RouterMiddleware($route))
-    ->addMiddleware(new SessionMiddleware, 'session')
+    ->addMiddleware(new SessionMiddleware(), 'session')
     ->addEmitterMiddleware(new EmitterMiddleware($emitter));
 
 // Let's Go!

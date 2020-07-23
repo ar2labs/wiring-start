@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controller;
 
-use App\Model\User;
 use App\Model\About;
 use App\Model\Book;
 use App\Model\Log;
+use App\Model\User;
 use Psr\Http\Message\ResponseInterface;
 use Wiring\Http\Controller\AbstractJsonViewController;
 use Wiring\Http\Helpers\Info;

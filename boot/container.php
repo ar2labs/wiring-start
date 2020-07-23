@@ -19,15 +19,15 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
 use Throwable;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
+use Wiring\Http\Exception\ErrorHandler;
 use Wiring\Http\Helpers\Console;
 use Wiring\Http\Helpers\Loader;
 use Wiring\Http\Helpers\Mailer;
 use Wiring\Http\Helpers\Session;
-use Wiring\Http\Exception\ErrorHandler;
 use Wiring\Interfaces\ConfigInterface;
 use Wiring\Interfaces\ConsoleInterface;
 use Wiring\Interfaces\DatabaseInterface;
@@ -51,7 +51,7 @@ return [
 
     RouterInterface::class => function (ContainerInterface $container) {
         // Mapper routes
-        $strategy = (new ApplicationStrategy);
+        $strategy = (new ApplicationStrategy());
         $strategy->setContainer($container);
 
         // Create router
@@ -103,7 +103,7 @@ return [
         ]);
 
         // Registers some extensions to be available in your templates.
-        $engine->addExtension(new \App\Provider\TwigExtension);
+        $engine->addExtension(new \App\Provider\TwigExtension());
 
         // Add session as global template variable
         $session = $container->get(SessionInterface::class);
