@@ -28,7 +28,7 @@ class TwigExtension extends AbstractExtension
     /**
      * Get functions.
      *
-     * @return array
+     * @return array<TwigFunction>
      */
     public function getFunctions(): array
     {
@@ -70,7 +70,7 @@ class TwigExtension extends AbstractExtension
      * @param string $key
      * @param string|null $default
      *
-     * @return array|false|null|string
+     * @return array<string>|false|null|string
      */
     public function env(string $key, string $default = null)
     {

@@ -13,6 +13,8 @@ class ServeCommand extends Command
 {
     /**
      * Configure the console command.
+     *
+     * @return void
      */
     protected function configure()
     {

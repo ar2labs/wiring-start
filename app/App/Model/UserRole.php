@@ -2,9 +2,12 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
-
-class UserRole extends Model
+/**
+ * Class UserRole
+ *
+ * @mixin \Illuminate\Database\Query\Builder
+ */
+class UserRole extends EloquentModel
 {
     /**
      * The database table used by the model.
@@ -21,12 +24,12 @@ class UserRole extends Model
     public $timestamps = false;
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $fillable = ['is_admin'];
 
     /**
-     * @var array
+     * @var array<string, string|\Datetime|boolean>
      */
     public static $defaults = [
         'is_admin' => false,

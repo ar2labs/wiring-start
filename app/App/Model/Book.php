@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Book extends BaseModel
+class Book extends FakeModel
 {
     /**
      * @var string
@@ -132,7 +132,7 @@ class Book extends BaseModel
     /**
      * Convert user data to array.
      *
-     * @return array
+     * @return array<string, int|string>
      */
     public function toArray()
     {

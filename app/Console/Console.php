@@ -8,7 +8,7 @@ use Symfony\Component\Console\Application;
 class Console extends Application
 {
     /**
-     * @var \Psr\Container\ContainerInterface
+     * @var ContainerInterface
      */
     protected $container;
 
@@ -30,6 +30,8 @@ class Console extends Application
      * Add commands.
      *
      * @param Kernel $kernel
+     *
+     * @return void
      */
     public function boot(Kernel $kernel)
     {

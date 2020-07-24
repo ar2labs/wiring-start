@@ -1,3 +1,9 @@
 parameters:
-    ignoreErrors:
-      - '#Call to an undefined static method App\\Model\\User::[a-zA-Z0-9_]+\(\)#'
+    inferPrivatePropertyTypeFromConstructor: true
+    tmpDir: .build/phpstan/
+    paths:
+        - app
+        - boot
+        - config
+        - routes
+    level: max

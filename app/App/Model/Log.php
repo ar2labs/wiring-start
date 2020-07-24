@@ -2,14 +2,12 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
- * Class User
+ * Class Log
  *
  * @mixin \Illuminate\Database\Query\Builder
  */
-class Log extends Model
+class Log extends EloquentModel
 {
     /**
      * The database table used by the model.
@@ -26,14 +24,14 @@ class Log extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<string>
      */
     protected $fillable = ['user_id', 'feedback', 'created_at'];
 
     /**
      * The attributes that are hidden.
      *
-     * @var array
+     * @var array<string>
      */
     protected $hidden = ['id'];
 

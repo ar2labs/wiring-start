@@ -94,11 +94,6 @@ class IndexController extends AbstractJsonViewController
     {
         $data = Log::all();
 
-        /** @var mixed $log */
-        foreach ($data as $log) {
-            $log->user;
-        }
-
         return $this
             ->json()
             ->render($data)

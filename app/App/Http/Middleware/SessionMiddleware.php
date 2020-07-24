@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class SessionMiddleware implements MiddlewareInterface
 {
     /**
-     * @var array
+     * @var array<string, bool|int|string|null>
      */
     protected $options = [
         'name' => 'wiring',
@@ -27,7 +27,7 @@ class SessionMiddleware implements MiddlewareInterface
     /**
      * Session middleware constructor.
      *
-     * @param array $options
+     * @param array<string> $options
      */
     public function __construct($options = [])
     {
@@ -57,8 +57,8 @@ class SessionMiddleware implements MiddlewareInterface
                 $httponly
             );
 
-            session_name($options['name']);
-            session_cache_limiter($options['cache_limiter']);
+            session_name((string) $options['name']);
+            session_cache_limiter((string) $options['cache_limiter']);
             session_start();
         }
     }
