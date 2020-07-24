@@ -2,9 +2,7 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PasswordReset extends Model
+class PasswordReset extends EloquentModel
 {
     /**
      * The database table used by the model.
@@ -16,7 +14,7 @@ class PasswordReset extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<string>
      */
     protected $fillable = ['email', 'token'];
 }

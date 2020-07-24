@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class BaseModel
+class FakeModel
 {
     /**
      * @var int

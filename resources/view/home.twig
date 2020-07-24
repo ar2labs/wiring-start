@@ -1,3 +1,7 @@
+{% block style %}
+<link rel="stylesheet" href="{{ '/css/modal.css' }}">
+{% endblock %}
+
 {% extends 'templates/layout.twig' %}
 {% block content %}
   <div class="content">
@@ -7,9 +11,7 @@
           Please <a href="http://browsehappy.com/">upgrade your browser</a> to
           improve your experience.</p>
       <![endif]-->
-
       <h1>Wiring micro framework</h1>
-
       <div>
         <a href="https://sonarcloud.io/dashboard?id=com.github.ar2labs-wiring" target="_blank" alt="Sonar Cloud">
           <img src="https://sonarcloud.io/api/project_badges/measure?project=com.github.ar2labs-wiring&metric=alert_status"></a>
@@ -18,15 +20,13 @@
         <a href="https://packagist.org/packages/ar2labs/wiring" target="_blank">
           <img src="https://poser.pugx.org/ar2labs/wiring/v/stable.svg"></a>
       </div>
-
-      <img src="/img/watermark.png" class="logo">
-
+      <img src="/img/wiring-white.png" class="logo">
       <footer class="light">
         <div>
-          <a href="/about" title="About">About</a> &nbsp;|&nbsp;
-          <a href="/user" title="Contributors">Contributors</a> &nbsp;|&nbsp;
-          <a href="/test" title="Test your API">Test your API</a> &nbsp;|&nbsp;
-          <a href="/info" title="Info">Info</a>
+          <label class="btn" for="modal-1">About</label>&nbsp;
+          <label class="btn" for="modal-2">Contributors</label>&nbsp;
+          <a class="btn" href="/test" title="Test your API">Test API</a>&nbsp;
+          <a class="btn" href="/info" title="Info">PHP Info</a>
         </div>
         <div>
           <p>
@@ -44,4 +44,5 @@
       </footer>
     </div>
   </div>
+{% include 'templates/partials/modal.twig' %}
 {% endblock %}

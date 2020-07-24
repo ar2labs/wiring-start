@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *
  * @mixin \Illuminate\Database\Query\Builder
  */
-class User extends Model
+class User extends EloquentModel
 {
     /**
      * The database table used by the model.
@@ -22,7 +21,7 @@ class User extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<string>
      */
     protected $fillable = [
         'username', 'email', 'password', 'active', 'active_hash',
@@ -32,7 +31,7 @@ class User extends Model
     /**
      * The attributes that are hidden.
      *
-     * @var array
+     * @var array<string>
      */
     protected $hidden = [
         'password', 'active_hash', 'remember_identifier',
@@ -44,6 +43,8 @@ class User extends Model
      *
      * @param string $identifier
      * @param string $token
+     *
+     * @return void
      */
     public function updateRememberCredentials(string $identifier, string $token)
     {
@@ -55,6 +56,8 @@ class User extends Model
 
     /**
      * Remove remember credentials.
+     *
+     * @return void
      */
     public function removeRememberCredentials()
     {
@@ -75,6 +78,7 @@ class User extends Model
      * Check has role.
      *
      * @param string $role
+     *
      * @return bool
      */
     public function hasRole(string $role)

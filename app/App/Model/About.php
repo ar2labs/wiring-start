@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Carbon\Carbon;
 
-class About extends BaseModel
+class About extends FakeModel
 {
     /** @var string $title */
     private $title;
@@ -157,7 +157,7 @@ class About extends BaseModel
     /**
      * Convert data to array.
      *
-     * @return array
+     * @return array<string, \DateTime|string>
      */
     public function toArray()
     {

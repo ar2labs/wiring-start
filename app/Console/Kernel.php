@@ -9,12 +9,12 @@ use Console\Commands\ServeCommand;
 class Kernel
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected $commands = [];
 
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected $defaultCommands = [
         ServeCommand::class,
@@ -23,7 +23,7 @@ class Kernel
     /**
      * Get commands array.
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getCommands(): array
     {
@@ -33,7 +33,7 @@ class Kernel
     /**
      * Get default commands array.
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getDefaultCommands(): array
     {

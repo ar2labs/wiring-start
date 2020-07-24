@@ -38,6 +38,17 @@
             </select>
           </div>
         </div>
+        <div class="row w-100">
+          <div class="flex-10">
+            <i>Example: http:\\localhost:8000/api/v1/user</i>
+          </div>
+        </div>
+        <br/>
+        <div class="row w-100">
+          <div class="flex-1">
+            <button class="btn w-100" onclick="execute()" type="submit">Send</button>
+          </div>
+        </div>
         <br/>
         <div class="row w-100">
           <div class="flex-1 pdg-r">
@@ -49,22 +60,17 @@
           <div class="flex-1 pdg-l">
             <div class="row-column w-100">
               <label>Output</label>
-              <textarea id="output" name="output" rows="15"></textarea>
+              <pre class="json-area"><code id="output"></code></pre>
             </div>
-          </div>
-        </div>
-        <br/>
-        <div class="row w-100">
-          <div class="flex-1">
-            <button class="w-100" onclick="execute()" type="submit">Executar</button>
           </div>
         </div>
       </fieldset>
     </div>
   </div>
+  <br>
   <footer class="light center">
     <div>
-      <a href="/" title="About">Back to home</a>
+      <a class="btn" href="/" title="About">Back to home</a>
     </div>
     <div>
       <p>

@@ -16,7 +16,7 @@ class Eloquent extends Capsule
     /**
      * Database manager constructor.
      *
-     * @param array $settings
+     * @param array<string> $settings
      */
     public function __construct(array $settings = [])
     {

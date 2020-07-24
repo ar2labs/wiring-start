@@ -220,15 +220,11 @@ return [
                     return $view
                         ->render('error/error404.twig')
                         ->to($response, 404);
-
-                    break;
                 case 405:
                     // Define allow methods
                     return $view
                         ->render('error/error405.twig', ['allow' => []])
                         ->to($response, 405);
-
-                    break;
                 default:
                     return $view
                         ->render('error/error.twig', $error)

@@ -21,7 +21,7 @@ class UserRestfulController extends AbstractRestfulController
      */
     public function index(ServerRequestInterface $request): ResponseInterface
     {
-        $users = User::where('active', '=', true)->get();
+        $users = (new User())->where('active', '=', true)->get();
         $data = $this->success('Ok', $users);
 
         return $this
@@ -58,7 +58,7 @@ class UserRestfulController extends AbstractRestfulController
         }
 
         /** @var mixed $user */
-        $user = User::create([
+        $user = (new User())->create([
             'username' => $input->username,
             'email' => $input->email,
             'active' => $input->active,
@@ -81,7 +81,7 @@ class UserRestfulController extends AbstractRestfulController
      * Get an existing resource.
      *
      * @param ServerRequestInterface $request
-     * @param array $args
+     * @param array<string> $args
      *
      * @return ResponseInterface
      */
@@ -90,7 +90,7 @@ class UserRestfulController extends AbstractRestfulController
         array $args
     ): ResponseInterface {
         /** @var mixed $user */
-        $user = User::find($args['id']);
+        $user = (new User())->find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
@@ -108,7 +108,7 @@ class UserRestfulController extends AbstractRestfulController
      * Update\Replace an existing resource.
      *
      * @param ServerRequestInterface $request
-     * @param array $args
+     * @param array<string> $args
      *
      * @return ResponseInterface
      */
@@ -119,7 +119,7 @@ class UserRestfulController extends AbstractRestfulController
         $input = (object) json_decode($request->getBody()->getContents(), true);
 
         /** @var mixed $user */
-        $user = User::find($args['id']);
+        $user = (new User())->find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
@@ -158,7 +158,7 @@ class UserRestfulController extends AbstractRestfulController
      * Update\Modify an existing resource.
      *
      * @param ServerRequestInterface $request
-     * @param array $args
+     * @param array<string> $args
      *
      * @return ResponseInterface
      */
@@ -169,7 +169,7 @@ class UserRestfulController extends AbstractRestfulController
         $input = (object) json_decode($request->getBody()->getContents(), true);
 
         /** @var mixed $user */
-        $user = User::find($args['id']);
+        $user = (new User())->find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
@@ -208,7 +208,7 @@ class UserRestfulController extends AbstractRestfulController
      * Delete an existing resource.
      *
      * @param ServerRequestInterface $request
-     * @param array $args
+     * @param array<string> $args
      *
      * @return ResponseInterface $response
      */
@@ -217,7 +217,7 @@ class UserRestfulController extends AbstractRestfulController
         array $args
     ): ResponseInterface {
         /** @var mixed $user */
-        $user = User::find($args['id']);
+        $user = (new User())->find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);

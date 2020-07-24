@@ -1,12 +1,40 @@
 const contentType = "application/json;charset=utf-8";
 
+if (!library)
+   var library = {};
+
+library.json = {
+    replacer: function(match, pIndent, pKey, pVal, pEnd) {
+        let key = '<span class=json-key>';
+        let val = '<span class=json-value>';
+        let str = '<span class=json-string>';
+        let r = pIndent || '';
+
+        if (pKey)
+         r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+
+        if (pVal)
+         r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+
+        return r + (pEnd || '');
+    },
+
+    prettyPrint: function(obj) {
+        let jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+
+        return JSON.stringify(obj, null, 3)
+            .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+            .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(jsonLine, library.json.replacer);
+        }
+    };
+
 window.onload = init();
 
 // Init
 function init() {
     updateInput();
 }
-
 
 // Input control
 function updateInput() {
@@ -21,7 +49,6 @@ function updateInput() {
 
 function checkValidations() {
     let url = document.getElementById("url").value;
-
 
     if ("" === url.trim()) {
         alert("Please, enter a URL.")
@@ -42,7 +69,6 @@ function execute() {
     let select = document.getElementById("method");
     let method = select.options[select.selectedIndex].value;
     let data = document.getElementById("input").value;
-
 
     switch (method) {
         case 'GET':
@@ -100,5 +126,13 @@ function patch(http, url, data) {
 }
 
 function result(http) {
-    document.getElementById("output").value = http.responseText;
+    let content = http.responseText;
+    let object = JSON.parse(content);
+
+    if (typeof object === 'object' && object !== null) {
+        content = document.getElementById("output").innerHTML =
+            library.json.prettyPrint(object);
+    }
+
+    document.getElementById("output").innerHTML = content;
 }

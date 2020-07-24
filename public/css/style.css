@@ -45,6 +45,15 @@ p, figure {
 pre {
   height: auto;
   overflow: auto;
+  margin: 2em;
+  padding: 2em;
+  border: 1px solid white;
+  max-height: 10em;
+  overflow: auto;
+  border: 0 none hlsa(0,0%,0%,0);
+  outline: 0 none hlsa(0,0%,0%,0);
+  box-shadow: none;
+  -webkit-appearance: none;
   word-break: normal !important;
   word-wrap: normal !important;
   white-space: pre !important;
