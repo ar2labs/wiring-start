@@ -12,15 +12,15 @@
     "require": {
         "ar2labs/wiring": "^2.3",
         "hassankhan/config": "^2.1",
-        "illuminate/database": "^7.21",
-        "laminas/laminas-diactoros": "^2.3",
+        "illuminate/database": "^7.29",
+        "laminas/laminas-diactoros": "^2.4",
         "league/route": "^4.5",
         "monolog/monolog": "^2.1",
-        "php-di/php-di": "^6.2",
+        "php-di/php-di": "^6.3",
         "phpmailer/phpmailer": "^6.1",
         "symfony/console": "^5.1",
-        "twig/twig": "^3.0",
-        "vlucas/phpdotenv": "^4.1.8"
+        "twig/twig": "^3.1",
+        "vlucas/phpdotenv": "^4.1"
     },
     "autoload": {
         "psr-4": {
