@@ -76,8 +76,8 @@ class IndexController extends AbstractJsonViewController
             ->setAuthor('AR2 Labs')
             ->setTitle('Wiring Microframework')
             ->setPublisher('AR2 Labs')
-            ->setEdition('2.0')
-            ->setYear(2019);
+            ->setEdition(APP_VERSION)
+            ->setYear(2022);
 
         return $this
             ->json()

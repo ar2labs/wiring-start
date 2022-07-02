@@ -40,7 +40,7 @@ use Wiring\Interfaces\ViewStrategyInterface;
 use Wiring\Strategy\JsonStrategy;
 use Wiring\Strategy\ViewStrategy;
 
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 return [
 
@@ -161,7 +161,7 @@ return [
 
         $fileHandler = new StreamHandler(
             ROOT_PATH . 'storage/log/app.log',
-            Logger::DEBUG
+            $level = 'debug'
         );
 
         $fileHandler->setFormatter(new LineFormatter());

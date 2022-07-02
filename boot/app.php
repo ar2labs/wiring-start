@@ -9,8 +9,8 @@ use Wiring\Interfaces\ConfigInterface;
 use Wiring\Interfaces\DatabaseInterface;
 use Wiring\Interfaces\RouterInterface;
 
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequestFactory;
 
 // Create a dependency injection container
 $builder = new DI\ContainerBuilder();
