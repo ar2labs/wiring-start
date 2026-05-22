@@ -1,89 +1,109 @@
 {% extends 'templates/layout.twig' %}
+
 {% block style %}
   <link rel="stylesheet" href="{{ '/css/test.css' }}">
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <div class="center">
-      <h1>Wiring micro framework</h1>
-      <div>
-        <a alt="Travis CI" href="https://travis-ci.org/ar2labs/wiring">
-          <img src="https://travis-ci.org/ar2labs/wiring.svg?branch=master"></a>
-        <a href="https://packagist.org/packages/ar2labs/wiring">
-          <img src="https://poser.pugx.org/ar2labs/wiring/d/total.svg"></a>
-        <a href="https://packagist.org/packages/ar2labs/wiring">
-          <img src="https://poser.pugx.org/ar2labs/wiring/v/stable.svg"></a>
+  <!-- Floating Header consistent with homepage -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand">
+        <span>Wiring micro framework</span>
+      </a>
+      <nav class="nav-links">
+        <a class="btn btn-outline" href="/">Back to home</a>
+        <a class="btn btn-primary" href="/info">PHP Info</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sandbox UI Container -->
+  <main class="sandbox-container">
+    <div class="container">
+      <div class="sandbox-header center">
+        <h1>REST API Sandbox</h1>
+        <p class="subtitle">An interactive developer client to test your Wiring API endpoints and route middlewares in real-time.</p>
+      </div>
+
+      <div class="sandbox-card">
+        <div class="api-client-form">
+          <!-- Request Bar -->
+          <div class="request-bar">
+            <div class="method-selector">
+              <select id="method" name="method" onchange="updateInput()" aria-label="HTTP Method Selection">
+                <option selected value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="PATCH">PATCH</option>
+                <option value="DEL">DELETE</option>
+              </select>
+            </div>
+            <div class="url-input-wrapper">
+              <input id="url" name="url" type="url" value="http://localhost:8000/api/v1/user" placeholder="Enter endpoint URL (e.g. http://localhost:8000/api/v1/user)" aria-label="API Endpoint URL" required />
+            </div>
+            <div class="send-action">
+              <button class="btn btn-primary btn-send" onclick="execute()" type="submit">
+                <span>Send Request</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="example-hint">
+            <span class="hint-label">Try this route:</span>
+            <code>http://localhost:8000/api/v1/user</code>
+            <span class="hint-desc">(the built-in starter endpoint)</span>
+          </div>
+
+          <!-- Dual Pane Panel -->
+          <div class="sandbox-grid">
+            <!-- Left Pane: Request Body -->
+            <div class="sandbox-pane">
+              <div class="pane-header">
+                <h3>Request Body (JSON)</h3>
+                <span class="pane-status body-json">RAW PAYLOAD</span>
+              </div>
+              <div class="pane-body">
+                <textarea id="input" name="input" rows="15" placeholder='{
+  "name": "Jane Doe",
+  "email": "jane@example.com"
+}' aria-label="JSON request body payload"></textarea>
+              </div>
+            </div>
+
+            <!-- Right Pane: Response Output -->
+            <div class="sandbox-pane">
+              <div class="pane-header">
+                <h3>Response Preview</h3>
+                <span id="response-badge" class="pane-status response-code">NO RUN</span>
+              </div>
+              <div class="pane-body">
+                <div class="response-terminal">
+                  <pre class="json-area"><code id="output">// Click Send Request above to execute the API call...</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="form">
-      <fieldset>
-        <legend>A simple interface for you to test your API
-        </legend>
-        <label>URL
-          <span>*</span>
-        </label>
-        <br/>
-        <div class="row w-100">
-          <div class="flex-10">
-            <input class="w-100" id="url" name="url" type="text"/>
-          </div>
-          <div class="flex-2 action-select">
-            <select class="bk-color-white w-100" id="method" name="method" onchange="updateInput()">
-              <option selected value="GET">GET</option>
-              <option value="POST">POST</option>
-              <option value="PUT">PUT</option>
-              <option value="PATCH">PATCH</option>
-              <option value="DEL">DELETE</option>
-            </select>
-          </div>
-        </div>
-        <div class="row w-100">
-          <div class="flex-10">
-            <i>Example: http:\\localhost:8000/api/v1/user</i>
-          </div>
-        </div>
-        <br/>
-        <div class="row w-100">
-          <div class="flex-1">
-            <button class="btn w-100" onclick="execute()" type="submit">Send</button>
-          </div>
-        </div>
-        <br/>
-        <div class="row w-100">
-          <div class="flex-1 pdg-r">
-            <div class="row-column w-100">
-              <label>Input (JSON)</label>
-              <textarea id="input" name="input" rows="15"></textarea>
-            </div>
-          </div>
-          <div class="flex-1 pdg-l">
-            <div class="row-column w-100">
-              <label>Output</label>
-              <pre class="json-area"><code id="output"></code></pre>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-  <br>
-  <footer class="light center">
-    <div>
-      <a class="btn" href="/" title="About">Back to home</a>
-    </div>
-    <div>
-      <p>
-        <a href="https://packagist.org/packages/ar2labs/wiring">
-          <img src="https://poser.pugx.org/ar2labs/wiring/license.svg"></a>
-      </p>
-    </div>
-    <div>
-      <p>©
-        {{ "now"|date("Y") }},
-        <a href="https://github.com/ar2labs" target="_blank">AR2 Labs</a>
-        - Open Source Community.
-      </p>
+  </main>
+
+  <!-- Sandbox Footer -->
+  <footer class="footer">
+    <div class="container center">
+      <div class="footer-actions">
+        <a class="btn btn-outline" href="/">Back to home</a>
+      </div>
+      <div class="footer-badges">
+        <a href="https://packagist.org/packages/ar2labs/wiring" target="_blank" aria-label="Composer Package License">
+          <img src="https://poser.pugx.org/ar2labs/wiring/license.svg" alt="License Badge">
+        </a>
+      </div>
+      <p class="copyright">© {{ "now"|date("Y") }} <a href="https://github.com/ar2labs" target="_blank">AR2 Labs</a> - Open Source Community. All rights reserved.</p>
     </div>
   </footer>
 {% endblock %}
