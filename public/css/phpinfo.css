@@ -1,120 +1,342 @@
-@font-face {
-  font-family: 'One Wire';
-  font-style: normal;
-  font-weight: 400;
-  src: local('One Wire Regular'), local('One Wire-Regular'), url(../font/onewire.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+/*
+ * Wiring Start CSS - Premium phpinfo() Dark Mode Redesign
+ */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Tech-Orange & Dark Slate Scheme */
+  --bg-darker: #090c10;
+  --bg-main: #0e131f;
+  --bg-surface: #161c2c;
+  --bg-surface-hover: #1e263c;
+  
+  --primary: #fe7c14; /* Logo Orange */
+  --primary-hover: #ff913b;
+  --secondary: #ffb254; /* Light orange-yellow */
+  --border-color: #202937; /* Dominant Logo Slate Gray */
+  
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dark: #64748b;
+  
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.content {
-  font-family: 'One Wire', sans-serif;
-  padding: 0;
+/* Base Body Resets */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
   margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Header & Floating Navigation Cohesive Style */
+header.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(14, 19, 31, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.brand span {
+  background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main) !important;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-muted);
+}
+
+.center {
+  text-align: center;
+}
+
+/* Container page layout */
+.phpinfo-container {
+  padding: 4rem 0 2rem;
+}
+
+.phpinfo-header {
+  margin-bottom: 3rem;
+}
+
+.phpinfo-header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.phpinfo-header p.subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Diagnostics wrapper card */
+.phpinfo-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+/* Overriding raw phpinfo() styles inside .php-info wrapper */
+.php-info {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  text-align: left;
 }
 
 .php-info pre {
   margin: 0;
-  font-family: monospace;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--secondary);
 }
 
-.php-info a {
-  color: #0067b3;
-}
-
-.php-info a:link {
-  color: #0067b3;
+.php-info a:link, 
+.php-info a:visited {
+  color: var(--primary);
   text-decoration: none;
-  background-color: #ffffff;
 }
 
 .php-info a:hover {
   text-decoration: underline;
 }
 
+/* General phpinfo() Table styling */
 .php-info table {
   border-collapse: collapse;
-  border: 0;
+  border: 1px solid var(--border-color);
   width: 100%;
-  box-shadow: 1px 2px 3px #ccc;
+  margin: 1.5rem 0 2.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.php-info .center {
-  text-align: center;
+.php-info td, 
+.php-info th {
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  word-break: break-all;
 }
 
-.php-info .center table {
-  margin: 1em auto;
+/* Table Category Header (e.g. PHP Core, Date, Json) */
+.php-info .h {
+  background-color: var(--border-color);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
   text-align: left;
+}
+
+.php-info .h h1 {
+  font-size: 1.1rem;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+/* Table Sub Headers (e.g. Directive | Local Value | Master Value) */
+.php-info th {
+  background-color: var(--bg-darker);
+  color: var(--primary);
+  font-weight: 700;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
 }
 
 .php-info .center th {
   text-align: center !important;
 }
 
-.php-info td {
-  border: 1px solid #fff;
-  font-size: 75%;
-  vertical-align: baseline;
-  padding: 4px 5px;
-}
-
-.php-info th {
-  border: 1px solid #fff;
-  font-size: 75%;
-  vertical-align: baseline;
-  padding: 4px 5px;
-}
-
-.php-info h1 {
-  font-size: 150%;
-}
-
-.php-info h2 {
-  font-size: 125%;
-}
-
-.php-info .p {
-  text-align: left;
-}
-
+/* Table parameter name cell */
 .php-info .e {
-  background-color: #0067b3;
-  color: #fff;
-  width: 30%;
-  font-weight: bold;
+  background-color: var(--bg-surface-hover);
+  color: var(--secondary);
+  font-weight: 600;
+  width: 32%;
 }
 
-.php-info .h {
-  background-color: #0067b3;
-  color: #fff;
-  font-weight: bold;
-}
-
+/* Table parameter values cell */
 .php-info .v {
-  background-color: #ddd;
-  max-width: 35px;
-  overflow-x: auto;
-  word-wrap: break-word;
+  background-color: rgba(9, 12, 16, 0.5);
+  color: var(--text-main);
 }
 
 .php-info .v i {
-  color: #999;
+  color: var(--text-dark);
+}
+
+/* Headings in native phpinfo */
+.php-info h1 {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.php-info h2 {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .php-info img {
   float: right;
   border: 0;
+  max-width: 90px;
+  height: auto;
+  border-radius: 6px;
+  padding: 0.25rem;
+  background-color: #fff;
+  margin-bottom: 1rem;
 }
 
 .php-info hr {
   width: 100%;
-  background-color: #ccc;
+  background-color: var(--border-color);
   border: 0;
   height: 1px;
+  margin: 3rem 0;
 }
 
-@media only screen and (min-width: 768px) {
-  .container {
-    width: 100%;
+/* Footer Section Styling */
+footer.footer {
+  background-color: var(--bg-darker);
+  border-top: 1px solid var(--border-color);
+  padding: 2.5rem 0;
+  margin-top: 5rem;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.copyright a {
+  color: var(--text-muted);
+}
+
+.copyright a:hover {
+  color: var(--primary);
+}
+
+/* Responsive constraints */
+@media screen and (max-width: 768px) {
+  .phpinfo-card {
+    padding: 1rem;
+  }
+  
+  .php-info td, 
+  .php-info th {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .nav-wrapper {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
