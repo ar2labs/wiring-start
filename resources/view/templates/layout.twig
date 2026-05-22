@@ -5,17 +5,22 @@
   <meta name="author" content="AR2 Labs">
 
   <!-- Meta tags most commonly used in search robots -->
-  <meta name="description" content="Wiring is a PHP micro framework core.">
-  <meta name="keywords" content="wiring,ar2labs,microframework,php,psr">
+  <meta name="description" content="Wiring is a high-performance PSR-oriented PHP micro framework core.">
+  <meta name="keywords" content="wiring,ar2labs,microframework,php,psr,routing,dependency injection,di,eloquent">
   <meta name="robots" content="index, follow">
 
   <!-- Meta tags to control layout in mobile browsers -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
   <!-- Shortcut icons -->
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Style sheets -->
   <link rel="stylesheet" href="{{ '/css/style.css' }}">
@@ -23,7 +28,7 @@
 
   <title>{{ pageTitle }}</title>
 </head>
-<body data-spy="scroll" data-target="#primary-menu">
+<body>
 
 {% block content %}{% endblock %}
 {% block script %}{% endblock %}

@@ -127,11 +127,32 @@ function patch(http, url, data) {
 
 function result(http) {
     let content = http.responseText;
-    let object = JSON.parse(content);
+    let badge = document.getElementById("response-badge");
+    
+    // Dynamically update HTTP response status badge
+    if (badge) {
+        let statusText = http.statusText || (http.status === 200 ? "OK" : http.status === 201 ? "Created" : "Response");
+        badge.innerText = `HTTP ${http.status} ${statusText}`;
+        if (http.status >= 200 && http.status < 300) {
+            badge.className = "pane-status response-code success";
+        } else {
+            badge.className = "pane-status response-code error";
+        }
+    }
+
+    let object = null;
+    try {
+        object = JSON.parse(content);
+    } catch (e) {
+        // Gracefully fallback for non-JSON responses (like server error page dumps)
+        object = null;
+    }
 
     if (typeof object === 'object' && object !== null) {
-        content = document.getElementById("output").innerHTML =
-            library.json.prettyPrint(object);
+        content = library.json.prettyPrint(object);
+    } else {
+        // If not valid JSON, escape HTML tags to prevent broken layout
+        content = content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     document.getElementById("output").innerHTML = content;

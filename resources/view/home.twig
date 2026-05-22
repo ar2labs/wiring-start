@@ -3,46 +3,321 @@
 {% endblock %}
 
 {% extends 'templates/layout.twig' %}
+
 {% block content %}
-  <div class="content">
-    <div class="center">
-      <!--[if lt IE 9]>
-          <p class="browsehappy">You are using an <strong>outdated</strong> browser.
-          Please <a href="http://browsehappy.com/">upgrade your browser</a> to
-          improve your experience.</p>
-      <![endif]-->
-      <h1>Wiring micro framework</h1>
-      <div>
-        <a href="https://sonarcloud.io/dashboard?id=com.github.ar2labs-wiring" target="_blank" alt="Sonar Cloud">
-          <img src="https://sonarcloud.io/api/project_badges/measure?project=com.github.ar2labs-wiring&metric=alert_status"></a>
-        <a href="https://github.com/ar2labs" target="_blank" alt="GitHub">
-          <img src="img/badge-br.png"></a>
-        <a href="https://packagist.org/packages/ar2labs/wiring" target="_blank">
-          <img src="https://poser.pugx.org/ar2labs/wiring/v/stable.svg"></a>
-      </div>
-      <img src="/img/wiring-white.png" class="logo">
-      <footer class="light">
-        <div>
-          <label class="btn" for="modal-1">About</label>&nbsp;
-          <label class="btn" for="modal-2">Contributors</label>&nbsp;
-          <a class="btn" href="/test" title="Test your API">Test API</a>&nbsp;
-          <a class="btn" href="/info" title="Info">PHP Info</a>
-        </div>
-        <div>
-          <p>
-            <a href="https://packagist.org/packages/ar2labs/wiring">
-              <img src="https://poser.pugx.org/ar2labs/wiring/license.svg"></a>
-          </p>
-        </div>
-        <div>
-          <p>©
-            {{ "now"|date("Y") }},
-            <a href="https://github.com/ar2labs" target="_blank">AR2 Labs</a>
-            - Open Source Community.
-          </p>
-        </div>
-      </footer>
+  <!-- Header / Navigation -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand">
+        <span>Wiring micro framework</span>
+      </a>
+      <nav class="nav-links">
+        <label class="btn btn-link" for="modal-1">About</label>
+        <label class="btn btn-link" for="modal-2">Contributors</label>
+        <a class="btn btn-outline" href="/test">Test API</a>
+        <a class="btn btn-primary" href="/info">PHP Info</a>
+      </nav>
     </div>
-  </div>
-{% include 'templates/partials/modal.twig' %}
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <!-- Browser happy notification for legacy browsers -->
+      <!--[if lt IE 9]>
+          <p class="browsehappy">Você está usando um navegador <strong>desatualizado</strong>.
+          Por favor <a href="http://browsehappy.com/">atualize seu navegador</a> para melhorar sua experiência.</p>
+      <![endif]-->
+
+      <!-- Premium Large Centered Logo -->
+      <div class="hero-logo-wrapper">
+        <img src="/img/wiring-logo.png" alt="Wiring Framework Logo" class="hero-logo">
+      </div>
+
+      <h1>Wiring micro framework</h1>
+      <p class="hero-subtitle">
+        A high-performance, PSR-oriented PHP microframework starter kit. Built for developers who crave raw speed, micro-footprints, and modern standards-compliant code.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary pulse-glow" href="#commands">Get Started</a>
+        <a class="btn btn-outline" href="/test">Test Your API</a>
+      </div>
+
+      <div class="install-bar">
+        <span class="prompt">$</span>
+        <span id="install-cmd">composer create-project ar2labs/wiring-start</span>
+        <button class="copy-btn" onclick="copyInstallCommand()" title="Copy command">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="badges-row">
+        <a href="https://sonarcloud.io/dashboard?id=ar2labs_wiring" target="_blank" aria-label="Sonar Cloud Quality Gate">
+          <img src="https://sonarcloud.io/api/project_badges/measure?project=ar2labs_wiring&metric=alert_status" alt="SonarCloud Badges">
+        </a>
+        <a href="https://github.com/ar2labs" target="_blank" aria-label="GitHub Community">
+          <img src="img/badge-br.png" alt="GitHub Badge">
+        </a>
+        <a href="https://packagist.org/packages/ar2labs/wiring" target="_blank" aria-label="Packagist Stable Version">
+          <img src="https://poser.pugx.org/ar2labs/wiring/v/stable.svg" alt="Packagist Badge">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features Section -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Built on Modern Standards</h2>
+        <p>Wiring is built from the ground up to respect PHP FIG recommendations, enabling effortless interoperability and rock-solid modularity.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <h3>Full PSR Interoperability</h3>
+          <p>Out-of-the-box compliance with PSR-1, 3, 4, 6, 7, 11, 12, 14, 15, 17, and PSR-18. Swap containers, HTTP handlers, or loggers seamlessly.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </div>
+          <h3>Robust Dependency Injection</h3>
+          <p>Powered by PHP-DI 7. Enjoy auto-wiring, definition loading, and container injection to write highly testable and decoupled services.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+          </div>
+          <h3>Elegant Routing & Middlewares</h3>
+          <p>Swift routing utilizing League Route 6 and Laminas Diactoros. Chain custom PSR-15 middlewares for request interception and security gating.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4m0 5c0 2.21-3.58 4-8 4s-8-1.79-8-4" />
+            </svg>
+          </div>
+          <h3>Integrated Eloquent ORM</h3>
+          <p>Pre-configured with Illuminate Database (Eloquent 13). Manage database migrations, schemas, relationships, and queries using active-record elegance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Stack Section -->
+  <section class="section" id="stack">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ecosystem & Tech Stack</h2>
+        <p>Wiring integrates the best-in-class components of the modern PHP ecosystem into a cohesive, high-velocity starter kit.</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-logo">PHP</div>
+          <div class="stack-info">
+            <h4>PHP 8.5+</h4>
+            <p>Modern typing, attributes, and engine performance.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">WR</div>
+          <div class="stack-info">
+            <h4>Wiring 2.3</h4>
+            <p>Lightweight micro framework core.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">DI</div>
+          <div class="stack-info">
+            <h4>PHP-DI 7</h4>
+            <p>High-end Dependency Injection container.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">RT</div>
+          <div class="stack-info">
+            <h4>League Route 6</h4>
+            <p>Extremely fast and flexible HTTP router.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">LM</div>
+          <div class="stack-info">
+            <h4>Diactoros 3</h4>
+            <p>Laminas robust PSR-7 HTTP engine.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">EQ</div>
+          <div class="stack-info">
+            <h4>Eloquent 13</h4>
+            <p>Laravel's industry-leading ORM database tool.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">TW</div>
+          <div class="stack-info">
+            <h4>Twig 3</h4>
+            <p>Secure, clean, and flexible template rendering.</p>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-logo">CL</div>
+          <div class="stack-info">
+            <h4>Symfony Console 8</h4>
+            <p>Console runner for maker and custom commands.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commands & Folder Structure Grid -->
+  <section class="section" id="commands">
+    <div class="container">
+      <div class="grid-2">
+        <!-- Terminal Column -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+            </div>
+            <div class="terminal-tabs">
+              <button class="terminal-tab-btn active" onclick="switchTerminalTab('quick-start')">Quick Start</button>
+              <button class="terminal-tab-btn" onclick="switchTerminalTab('quality')">Quality Checks</button>
+              <button class="terminal-tab-btn" onclick="switchTerminalTab('maker-cli')">Maker CLI</button>
+            </div>
+          </div>
+          <div class="terminal-body">
+            <button class="terminal-copy" onclick="copyTerminalContent()" title="Copy block">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+              </svg>
+            </button>
+
+            <!-- Quick Start Pane -->
+            <div class="terminal-pane active" id="pane-quick-start">
+              <div class="terminal-line"><span class="comment"># Create a new project</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">composer create-project ar2labs/wiring-start</span></div>
+              <div class="terminal-line"><span class="comment"># Copy environment settings</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">cp .env.example .env</span></div>
+              <div class="terminal-line"><span class="comment"># Start the built-in development server</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">composer serve</span></div>
+              <div class="terminal-line"><span class="output">Server started at http://localhost:8000</span></div>
+            </div>
+
+            <!-- Quality Pane -->
+            <div class="terminal-pane" id="pane-quality">
+              <div class="terminal-line"><span class="comment"># Run the unit test suite</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">composer test</span></div>
+              <div class="terminal-line"><span class="comment"># Format codebase automatically</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">composer php-cs-fixer</span></div>
+              <div class="terminal-line"><span class="comment"># Analyze code with PHPStan</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">composer phpstan</span></div>
+            </div>
+
+            <!-- Maker Pane -->
+            <div class="terminal-pane" id="pane-maker-cli">
+              <div class="terminal-line"><span class="comment"># Display the maker list of console commands</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">php maker list</span></div>
+              <div class="terminal-line"><span class="comment"># Create a new HTTP Controller</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">php maker make:controller ProductController</span></div>
+              <div class="terminal-line"><span class="comment"># Create a new active-record Model</span></div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="command">php maker make:model Product</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Directory Explorer Column -->
+        <div class="tree-container">
+          <div class="tree-title">
+            <span>Project Workspace Structure</span>
+            <span style="color: var(--text-dark); font-size: 0.7rem;">wiring-start/</span>
+          </div>
+          <div class="tree-node"><span class="tree-folder">📁 app/App</span> <span class="tree-comment">// HTTP Controllers, models, and providers</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 app/Console</span> <span class="tree-comment">// CLI commands used by maker tool</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 boot</span> <span class="tree-comment">// Application bootstrapping & DI bindings</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 config</span> <span class="tree-comment">// Configuration parameters and .env loaders</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 public</span> <span class="tree-comment">// Web server root folder (Assets, css, js, index.php)</span></div>
+          <div class="tree-node" style="padding-left: 3rem;"><span class="tree-folder">📁 css</span> <span class="tree-comment">// Custom style assets (style.css, modal.css)</span></div>
+          <div class="tree-node" style="padding-left: 3rem;"><span class="tree-folder">📁 img</span> <span class="tree-comment">// Brand logos and graphic files</span></div>
+          <div class="tree-node" style="padding-left: 3rem;"><span class="tree-file">📄 index.php</span> <span class="tree-comment">// Front controller loading application</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 resources/view</span> <span class="tree-comment">// Twig view templates (.twig templates)</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 routes</span> <span class="tree-comment">// Router file definitions (web.php, api.php)</span></div>
+          <div class="tree-node"><span class="tree-folder">📁 storage</span> <span class="tree-comment">// SQL database files, logs, and template caches</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/img/wiring-logo.png" alt="Wiring Logo" class="logo">
+            <span>Wiring</span>
+          </a>
+          <p>
+            Wiring is a robust, lightweight foundation for production-ready PHP projects. Standard compliant, interoperable, and lightning fast.
+          </p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><label style="cursor: pointer;" for="modal-1">About</label></li>
+            <li><label style="cursor: pointer;" for="modal-2">Contributors</label></li>
+            <li><a href="/test">Test Your API</a></li>
+            <li><a href="/info">PHP Diagnostics</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://github.com/ar2labs" target="_blank">AR2 Labs GitHub</a></li>
+            <li><a href="https://packagist.org/packages/ar2labs/wiring" target="_blank">Packagist Package</a></li>
+            <li><a href="https://www.php-fig.org" target="_blank">PHP FIG Standards</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <a href="https://packagist.org/packages/ar2labs/wiring" target="_blank">
+            <img src="https://poser.pugx.org/ar2labs/wiring/license.svg" alt="License Badge">
+          </a>
+        </div>
+        <div>
+          <p>© {{ "now"|date("Y") }} <a href="https://github.com/ar2labs" target="_blank">AR2 Labs</a> - Open Source Community. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Inclusion of Modals -->
+  {% include 'templates/partials/modal.twig' %}
+{% endblock %}
+
+{% block script %}
+  <script src="{{ '/js/app.js' }}"></script>
 {% endblock %}
