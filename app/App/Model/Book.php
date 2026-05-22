@@ -1,38 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 class Book extends FakeModel
 {
-    /**
-     * @var string
-     */
-    private $title;
+    private string $title;
 
-    /**
-     * @var string
-     */
-    private $author;
+    private string $author;
 
-    /**
-     * @var string
-     */
-    private $publisher;
+    private string $publisher;
 
-    /**
-     * @var string
-     */
-    private $edition;
+    private string $edition;
 
-    /**
-     * @var integer
-     */
-    private $year;
+    private int $year;
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -42,7 +29,7 @@ class Book extends FakeModel
      *
      * @return Book
      */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -52,7 +39,7 @@ class Book extends FakeModel
     /**
      * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
@@ -62,7 +49,7 @@ class Book extends FakeModel
      *
      * @return Book
      */
-    public function setAuthor($author)
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
@@ -72,7 +59,7 @@ class Book extends FakeModel
     /**
      * @return string
      */
-    public function getPublisher()
+    public function getPublisher(): string
     {
         return $this->publisher;
     }
@@ -82,7 +69,7 @@ class Book extends FakeModel
      *
      * @return Book
      */
-    public function setPublisher($publisher)
+    public function setPublisher(string $publisher): self
     {
         $this->publisher = $publisher;
 
@@ -92,7 +79,7 @@ class Book extends FakeModel
     /**
      * @return string
      */
-    public function getEdition()
+    public function getEdition(): string
     {
         return $this->edition;
     }
@@ -102,7 +89,7 @@ class Book extends FakeModel
      *
      * @return Book
      */
-    public function setEdition($edition)
+    public function setEdition(string $edition): self
     {
         $this->edition = $edition;
 
@@ -110,19 +97,19 @@ class Book extends FakeModel
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
 
     /**
-     * @param integer $year
+     * @param int $year
      *
      * @return Book
      */
-    public function setYear($year)
+    public function setYear(int $year): self
     {
         $this->year = $year;
 
@@ -134,7 +121,7 @@ class Book extends FakeModel
      *
      * @return array<string, int|string>
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->getId(),

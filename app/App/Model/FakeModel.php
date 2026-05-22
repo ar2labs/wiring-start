@@ -1,28 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
+
+use DateTime;
 
 class FakeModel
 {
-    /**
-     * @var int
-     */
-    private $id;
+    private int $id;
 
-    /**
-     * @var \DateTime
-     */
-    private $created;
+    private DateTime $created;
 
-    /**
-     * @var \DateTime
-     */
-    private $updated;
+    private DateTime $updated;
 
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -30,9 +25,9 @@ class FakeModel
     /**
      * @param int $id
      *
-     * @return self
+     * @return static
      */
-    public function setId($id)
+    public function setId(int $id): static
     {
         $this->id = $id;
 
@@ -40,19 +35,17 @@ class FakeModel
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreated()
+    public function getCreated(): DateTime
     {
         return $this->created;
     }
 
     /**
-     * @param \DateTime $created
-     *
-     * @return self
+     * @param DateTime $created
      */
-    public function setCreated($created)
+    public function setCreated(DateTime $created): static
     {
         $this->created = $created;
 
@@ -60,19 +53,17 @@ class FakeModel
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdated()
+    public function getUpdated(): DateTime
     {
         return $this->updated;
     }
 
     /**
-     * @param \DateTime $updated
-     *
-     * @return self
+     * @param DateTime $updated
      */
-    public function setUpdated($updated)
+    public function setUpdated(DateTime $updated): static
     {
         $this->updated = $updated;
 

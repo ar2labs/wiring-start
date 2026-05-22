@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Middleware\SessionMiddleware;
+declare(strict_types=1);
 
+use App\Http\Middleware\SessionMiddleware;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequestFactory;
 use Wiring\Application;
 use Wiring\Http\Middleware\EmitterMiddleware;
 use Wiring\Http\Middleware\RouterMiddleware;
@@ -9,12 +12,8 @@ use Wiring\Interfaces\ConfigInterface;
 use Wiring\Interfaces\DatabaseInterface;
 use Wiring\Interfaces\RouterInterface;
 
-use Laminas\Diactoros\Response;
-use Laminas\Diactoros\ServerRequestFactory;
-
 // Create a dependency injection container
 $builder = new DI\ContainerBuilder();
-$builder->useAnnotations(false);
 $builder->useAutowiring(true);
 
 // Check cache is enabled
@@ -63,9 +62,8 @@ $route = $container->get(RouterInterface::class);
 $emitter = null;
 
 // Adding global middlewares
-$app->addRouterMiddleware(new RouterMiddleware($route))
-    ->addMiddleware(new SessionMiddleware(), 'session')
-    ->addEmitterMiddleware(new EmitterMiddleware($emitter));
+$app->addMiddleware(new SessionMiddleware(), 'session')
+    ->addRouterMiddleware(new RouterMiddleware($route));
 
 // Let's Go!
-$app->run();
+(new EmitterMiddleware($emitter))->emit($app->run());

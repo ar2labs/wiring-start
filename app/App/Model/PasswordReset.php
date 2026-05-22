@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 class PasswordReset extends EloquentModel
@@ -14,7 +16,7 @@ class PasswordReset extends EloquentModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $fillable = ['email', 'token'];
 }

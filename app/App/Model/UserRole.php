@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 /**
@@ -24,12 +26,12 @@ class UserRole extends EloquentModel
     public $timestamps = false;
 
     /**
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $fillable = ['is_admin'];
 
     /**
-     * @var array<string, string|\Datetime|boolean>
+     * @var array<string, bool|string>
      */
     public static $defaults = [
         'is_admin' => false,

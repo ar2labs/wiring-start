@@ -1,72 +1,67 @@
-Wiring Start
-============
+# Wiring Start
 
-[![Build Status](https://travis-ci.org/ar2labs/wiring-start.svg?branch=master)](https://travis-ci.org/ar2labs/wiring-start)
-<a href="https://github.com/ar2labs/wiring/blob/master/LICENSE.md"><img src="https://poser.pugx.org/ar2labs/wiring/license.svg" alt="License"></a>
+[![Build](https://github.com/ar2labs/wiring-start/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/ar2labs/wiring-start/actions/workflows/build.yml)
+[![License](https://poser.pugx.org/ar2labs/wiring/license.svg)](https://github.com/ar2labs/wiring/blob/master/LICENSE.md)
 
-Wiring is a PHP micro framework core with Interoperability (PSRs).
+Starter application for [ar2labs/wiring](https://github.com/ar2labs/wiring), a PSR-oriented PHP microframework backend.
 
-## Quick start
+## Stack
 
-1. Create a start project:
+- PHP 8.5
+- Wiring 2.3.7
+- PHP-DI 7
+- League Route 6
+- Laminas Diactoros 3
+- Eloquent 13
+- Twig 3
+- Symfony Console 8
 
-    ```bash
-    composer create-project ar2labs/wiring-start
-    ```
+## Quick Start
 
-    or if you don't have a composer installation:
+```bash
+composer create-project ar2labs/wiring-start
+cd wiring-start
+cp .env.example .env
+php maker serve
+```
 
-    [Get Composer](https://getcomposer.org/download/)
+Open:
 
-2. Change to the directory created
+```bash
+http://localhost:8000
+```
 
-    ```bash
-    cd wiring-start/
-    ```
+You can also use Composer's script:
 
-3. Create `.env`
+```bash
+composer serve
+```
 
-    ```bash
-    cp .env.example .env
-    ```
+## Quality Checks
 
-4. Start PHP Built-in web server:
-
-    ```bash
-    php maker serve
-    ```
-
-    or run with php:
-
-    ```bash
-    php -S 127.0.0.1:8000 -t public/
-    ```
-
-5. Open your browser at:
-
-    ```bash
-    http://127.0.0.1:8000
-    ```
+```bash
+composer test
+composer php-cs-fixer
+composer phpstan
+```
 
 ## Requirements
 
-The following versions of PHP are supported by this version.
+- PHP 8.5+
+- Composer 2
+- PHP extensions: JSON, Mbstring, PDO
 
-* PHP 7.2
-* PHP 7.3
-* PHP 7.4
+## Structure
 
-PHP Extension Requirements:
+- `app/App`: HTTP controllers, middleware, providers and models
+- `app/Console`: CLI commands used by `maker`
+- `boot`: application and container bootstrap
+- `config`: application configuration
+- `public`: web root
+- `resources/view`: Twig templates
+- `routes`: web and API routes
+- `storage`: local database, cache and logs
 
-* CMath
-* Ctype
-* JSON
-* Mbstring
-* OpenSSL
-* PDO
-* Tokenizer
-* XML
+## License
 
-## Copyright and license
-
-Code and documentation copyright (c) 2020, Code released under the <a href="https://github.com/ar2labs/wiring/blob/master/LICENSE.md">BSD-3-Clause license</a>.
+BSD-3-Clause. See [LICENSE.md](LICENSE.md).

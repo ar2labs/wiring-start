@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controller;
 
 use App\Model\User;
-use Exception;
+use InvalidArgumentException;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wiring\Http\Controller\AbstractRestfulController;
@@ -39,30 +40,16 @@ class UserRestfulController extends AbstractRestfulController
      */
     public function create(ServerRequestInterface $request): ResponseInterface
     {
-        $input = (object) json_decode($request->getBody()->getContents(), true);
+        $input = $this->input($request);
 
-        if (!isset($input->username)) {
-            throw new Exception('The username attribute is required.');
-        }
-
-        if (!isset($input->email)) {
-            throw new Exception('The email attribute is required.');
-        }
-
-        if (!isset($input->password)) {
-            throw new Exception('The password attribute is required.');
-        }
-
-        if (!isset($input->active)) {
-            throw new Exception('The active attribute is required.');
-        }
+        $this->requireFields($input, ['username', 'email', 'password', 'active']);
 
         /** @var mixed $user */
-        $user = (new User())->create([
-            'username' => $input->username,
-            'email' => $input->email,
-            'active' => $input->active,
-            'password' => $input->password,
+        $user = User::create([
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'active' => $input['active'],
+            'password' => $input['password'],
         ]);
 
         if (!$user) {
@@ -74,7 +61,7 @@ class UserRestfulController extends AbstractRestfulController
         return $this
             ->json()
             ->render($data)
-            ->to($this->response, $data['code']);
+            ->to($this->response, $data['code'] ?? 200);
     }
 
     /**
@@ -116,30 +103,15 @@ class UserRestfulController extends AbstractRestfulController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-        $input = (object) json_decode($request->getBody()->getContents(), true);
+        $input = $this->input($request);
+        $this->requireFields($input, ['username', 'email', 'password', 'active']);
 
-        /** @var mixed $user */
-        $user = (new User())->find($args['id']);
+        $user = User::find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
         } else {
-            // Check and set fields
-            if (!isset($input->username)) {
-                $user->username = $input->username;
-            }
-
-            if (!isset($input->email)) {
-                $user->email = $input->email;
-            }
-
-            if (!isset($input->password)) {
-                $user->password = $input->password;
-            }
-
-            if (!isset($input->active)) {
-                $user->active = $input->active;
-            }
+            $user->fill($input);
 
             if ($user->save()) {
                 $data = $this->success('Ok', $user);
@@ -166,30 +138,19 @@ class UserRestfulController extends AbstractRestfulController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-        $input = (object) json_decode($request->getBody()->getContents(), true);
+        $input = $this->input($request);
 
-        /** @var mixed $user */
-        $user = (new User())->find($args['id']);
+        $user = User::find($args['id']);
 
         if (!$user) {
             $data = $this->error('User not found.', 404, $user);
         } else {
-            // Check and set fields
-            if (!isset($input->username)) {
-                $user->username = $input->username;
-            }
-
-            if (!isset($input->email)) {
-                $user->email = $input->email;
-            }
-
-            if (!isset($input->password)) {
-                $user->password = $input->password;
-            }
-
-            if (!isset($input->active)) {
-                $user->active = $input->active;
-            }
+            $user->fill(array_intersect_key($input, array_flip([
+                'username',
+                'email',
+                'password',
+                'active',
+            ])));
 
             if ($user->save()) {
                 $data = $this->success('Ok', $user);
@@ -236,5 +197,45 @@ class UserRestfulController extends AbstractRestfulController
             ->json()
             ->render($data)
             ->to($this->response);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function input(ServerRequestInterface $request): array
+    {
+        $contents = (string) $request->getBody();
+
+        if ($contents === '') {
+            return [];
+        }
+
+        try {
+            $input = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $exception) {
+            throw new InvalidArgumentException('Invalid JSON request body.', 0, $exception);
+        }
+
+        if (!is_array($input)) {
+            throw new InvalidArgumentException('JSON request body must be an object.');
+        }
+
+        return $input;
+    }
+
+    /**
+     * @param array<string, mixed> $input
+     * @param list<string> $fields
+     */
+    private function requireFields(array $input, array $fields): void
+    {
+        foreach ($fields as $field) {
+            if (!array_key_exists($field, $input)) {
+                throw new InvalidArgumentException(sprintf(
+                    'The %s attribute is required.',
+                    $field
+                ));
+            }
+        }
     }
 }

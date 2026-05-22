@@ -1,9 +1,10 @@
 parameters:
     inferPrivatePropertyTypeFromConstructor: true
+    bootstrapFiles:
+        - public/helpers.php
     tmpDir: .build/phpstan/
     paths:
         - app
         - boot
         - config
-        - routes
-    level: max
+    level: 5

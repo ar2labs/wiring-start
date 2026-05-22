@@ -3,25 +3,29 @@
     "description": "Wiring micro framework start",
     "type": "project",
     "license": "BSD-3-Clause",
+    "require": {
+        "php": "^8.5",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ar2labs/wiring": "^2.3.7",
+        "hassankhan/config": "^3.2",
+        "illuminate/database": "^13.0",
+        "laminas/laminas-diactoros": "^3.8",
+        "league/route": "^6.2",
+        "monolog/monolog": "^3.9",
+        "php-di/php-di": "^7.0",
+        "phpmailer/phpmailer": "^7.0",
+        "symfony/console": "^8.0",
+        "twig/twig": "^3.20",
+        "vlucas/phpdotenv": "^5.6"
+    },
     "authors": [
         {
             "name": "AR2 Labs Members",
             "email": "ar2labs@gmail.com"
         }
     ],
-    "require": {
-        "ar2labs/wiring": "^2.3",
-        "hassankhan/config": "^2.1",
-        "illuminate/database": "^7.29",
-        "laminas/laminas-diactoros": "^2.4",
-        "league/route": "^4.5",
-        "monolog/monolog": "^2.1",
-        "php-di/php-di": "^6.3",
-        "phpmailer/phpmailer": "^6.1",
-        "symfony/console": "^5.1",
-        "twig/twig": "^3.1",
-        "vlucas/phpdotenv": "^4.1"
-    },
     "autoload": {
         "psr-4": {
             "App\\": "app/App/",
@@ -30,12 +34,22 @@
     },
     "scripts": {
         "test": [
+            "@composer-validate",
+            "@composer-audit",
+            "@platform-check",
+            "@php-cs-fixer-check",
             "@phpstan"
         ],
-        "php-cs-fixer": "php-cs-fixer fix --config=php_cs.dist --ansi --no-interaction",
-        "phpstan": "phpstan analyse app boot config --level=max --autoload-file=./public/helpers.php --no-progress --ansi"
+        "composer-validate": "composer validate --strict",
+        "composer-audit": "composer audit --locked --abandoned=fail",
+        "platform-check": "composer check-platform-reqs",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix --config=php_cs.dist --no-interaction",
+        "php-cs-fixer-check": "vendor/bin/php-cs-fixer fix --config=php_cs.dist --dry-run --diff --no-interaction",
+        "phpstan": "php -d memory_limit=-1 vendor/bin/phpstan analyse --configuration phpstan.neon --no-progress --ansi",
+        "serve": "php maker serve"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.8"
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.0"
     }
 }

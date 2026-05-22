@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Console;
 
 use Psr\Container\ContainerInterface;
@@ -7,10 +9,7 @@ use Symfony\Component\Console\Application;
 
 class Console extends Application
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * Console constructor.
@@ -19,7 +18,7 @@ class Console extends Application
      * @param string $name
      * @param string $version
      */
-    public function __construct(ContainerInterface $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
+    public function __construct(ContainerInterface $container, string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {
         parent::__construct($name, $version);
 
@@ -33,14 +32,14 @@ class Console extends Application
      *
      * @return void
      */
-    public function boot(Kernel $kernel)
+    public function boot(Kernel $kernel): void
     {
         foreach ($kernel->getCommands() as $command) {
-            $this->add(new $command());
+            $this->addCommand(new $command());
         }
 
         foreach ($kernel->getDefaultCommands() as $command) {
-            $this->add(new $command($this->container));
+            $this->addCommand(new $command($this->container));
         }
     }
 }

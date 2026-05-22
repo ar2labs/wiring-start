@@ -7,7 +7,7 @@ require __DIR__ . '/public/helpers.php';
 $builder = new DI\ContainerBuilder();
 
 // Adding settings
-$builder->addDefinitions(dirname(__DIR__) . '/boot/container.php');
+$builder->addDefinitions(__DIR__ . '/boot/container.php');
 
 // Generate container
 $container = $builder->build();

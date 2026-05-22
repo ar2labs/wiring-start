@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Console;
 
 use Psr\Container\ContainerInterface;
@@ -17,15 +19,9 @@ abstract class Command extends SymfonyCommand
 {
     use ContainerAwareTrait;
 
-    /**
-     * @var InputInterface $input
-     */
-    private $input;
+    private ?InputInterface $input = null;
 
-    /**
-     * @var OutputInterface $output
-     */
-    private $output;
+    private ?OutputInterface $output = null;
 
     /**
      * Command constructor.
@@ -39,6 +35,12 @@ abstract class Command extends SymfonyCommand
         $this->setContainer($container);
     }
 
+    protected function initialize(InputInterface $input, OutputInterface $output): void
+    {
+        $this->input = $input;
+        $this->output = $output;
+    }
+
     /**
      * Set arguments.
      *
@@ -46,9 +48,9 @@ abstract class Command extends SymfonyCommand
      *
      * @return mixed
      */
-    protected function argument(string $name)
+    protected function argument(string $name): mixed
     {
-        return $this->input->getArgument($name);
+        return $this->input?->getArgument($name);
     }
 
     /**
@@ -58,9 +60,9 @@ abstract class Command extends SymfonyCommand
      *
      * @return mixed
      */
-    protected function option(string $name)
+    protected function option(string $name): mixed
     {
-        return $this->input->getOption($name);
+        return $this->input?->getOption($name);
     }
 
     /**
@@ -68,11 +70,11 @@ abstract class Command extends SymfonyCommand
      *
      * @param string $message
      *
-     * @return mixed
+     * @return void
      */
-    protected function info(string $message)
+    protected function info(string $message): void
     {
-        return $this->output->writeln('<info>' . $message . '</info>');
+        $this->output?->writeln('<info>' . $message . '</info>');
     }
 
     /**
@@ -80,11 +82,11 @@ abstract class Command extends SymfonyCommand
      *
      * @param string $message
      *
-     * @return mixed
+     * @return void
      */
-    protected function comment(string $message)
+    protected function comment(string $message): void
     {
-        return $this->output->writeln('<comment>' . $message . '</comment>');
+        $this->output?->writeln('<comment>' . $message . '</comment>');
     }
 
     /**
@@ -92,10 +94,10 @@ abstract class Command extends SymfonyCommand
      *
      * @param string $message
      *
-     * @return mixed
+     * @return void
      */
-    protected function error(string $message)
+    protected function error(string $message): void
     {
-        return $this->output->writeln('<error>' . $message . '</error>');
+        $this->output?->writeln('<error>' . $message . '</error>');
     }
 }

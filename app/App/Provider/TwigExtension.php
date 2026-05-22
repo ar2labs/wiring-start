@@ -47,9 +47,12 @@ class TwigExtension extends AbstractExtension
      *
      * @return string
      */
-    public function asset($name = ''): string
+    public function asset(string $name = ''): string
     {
-        return env('APP_URL') . '/' . $name;
+        $appUrl = env('APP_URL', '');
+        $appUrl = is_string($appUrl) ? rtrim($appUrl, '/') : '';
+
+        return $appUrl . '/' . ltrim($name, '/');
     }
 
     /**
@@ -59,20 +62,23 @@ class TwigExtension extends AbstractExtension
      *
      * @return string
      */
-    public function path($name = ''): string
+    public function path(string $name = ''): string
     {
-        return env('APP_URL', 'http://' . $_SERVER['SERVER_NAME']) . $name;
+        $serverName = $_SERVER['SERVER_NAME'] ?? 'localhost';
+        $defaultUrl = 'http://' . (is_string($serverName) ? $serverName : 'localhost');
+        $appUrl = env('APP_URL', $defaultUrl);
+        $appUrl = is_string($appUrl) ? rtrim($appUrl, '/') : $defaultUrl;
+
+        return $appUrl . '/' . ltrim($name, '/');
     }
 
     /**
      * Get dotenv paramaters.
      *
      * @param string $key
-     * @param string|null $default
-     *
-     * @return array<string>|false|null|string
+     * @return mixed
      */
-    public function env(string $key, string $default = null)
+    public function env(string $key, mixed $default = null): mixed
     {
         return env($key, $default);
     }

@@ -16,7 +16,7 @@ class ServeCommand extends Command
      *
      * @return void
      */
-    protected function configure()
+    protected function configure(): void
     {
         $desc = 'Serve the application on the PHP development server';
 
@@ -45,24 +45,29 @@ class ServeCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $path = getenv('APP_PATH');
+        $path = env('APP_PATH', ROOT_PATH);
+        $path = is_string($path) ? $path : ROOT_PATH;
 
-        chdir(\is_string($path) ? $path : '../../../');
+        if ($path === './' || $path === '.') {
+            $path = ROOT_PATH;
+        }
+
+        chdir($path);
 
         $host = $input->getOption('host');
         $port = $input->getOption('port');
 
-        $host = \is_string($host) ? $host : 'localhost';
-        $port = \is_string($port) ? $port : '8000';
+        $host = is_string($host) ? $host : 'localhost';
+        $port = is_string($port) ? $port : '8000';
 
         $mesg = '<info>PHP built-in Web Server started on' .
             "</info> <comment>http://{$host}:{$port}</comment>";
 
         $output->writeln($mesg);
 
-        $public = $path . '/public';
+        $public = rtrim($path, '/\\') . '/public';
 
         passthru('"' . PHP_BINARY . '"' .
             " -S {$host}:{$port} -t \"{$public}\"");

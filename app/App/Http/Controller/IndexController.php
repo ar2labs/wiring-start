@@ -36,8 +36,7 @@ class IndexController extends AbstractJsonViewController
      */
     public function user(): ResponseInterface
     {
-        /** @var \App\Model\User $users */
-        $users = (new user())->all();
+        $users = (new User())->all();
 
         return $this
             ->json()
@@ -69,15 +68,13 @@ class IndexController extends AbstractJsonViewController
      */
     public function book(): ResponseInterface
     {
-        /** @var \App\Model\Book $book */
-        $book = $this
-            ->get(Book::class)
+        $book = (new Book())
             ->setId(1)
             ->setAuthor('AR2 Labs')
             ->setTitle('Wiring Microframework')
             ->setPublisher('AR2 Labs')
             ->setEdition(APP_VERSION)
-            ->setYear(2022);
+            ->setYear(2026);
 
         return $this
             ->json()

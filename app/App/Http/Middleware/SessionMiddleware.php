@@ -44,8 +44,8 @@ class SessionMiddleware implements MiddlewareInterface
             $current = session_get_cookie_params();
 
             $lifetime = (int) ($options['lifetime'] ?: $current['lifetime']);
-            $path = $options['path'] ?: $current['path'];
-            $domain = $options['domain'] ?: $current['domain'];
+            $path = is_string($options['path']) ? $options['path'] : $current['path'];
+            $domain = is_string($options['domain']) ? $options['domain'] : $current['domain'];
             $secure = (bool) $options['secure'];
             $httponly = (bool) $options['httponly'];
 

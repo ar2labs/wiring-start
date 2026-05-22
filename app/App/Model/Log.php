@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Log
@@ -24,23 +28,23 @@ class Log extends EloquentModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $fillable = ['user_id', 'feedback', 'created_at'];
 
     /**
      * The attributes that are hidden.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $hidden = ['id'];
 
     /**
      * Return user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo<User, $this>
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo('App\Model\User');
     }

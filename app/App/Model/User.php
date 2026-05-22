@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -21,7 +23,7 @@ class User extends EloquentModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'username', 'email', 'password', 'active', 'active_hash',
@@ -31,7 +33,7 @@ class User extends EloquentModel
     /**
      * The attributes that are hidden.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password', 'active_hash', 'remember_identifier',
@@ -46,7 +48,7 @@ class User extends EloquentModel
      *
      * @return void
      */
-    public function updateRememberCredentials(string $identifier, string $token)
+    public function updateRememberCredentials(string $identifier, string $token): void
     {
         $this->update([
             'remember_identifier' => $identifier,
@@ -59,17 +61,12 @@ class User extends EloquentModel
      *
      * @return void
      */
-    public function removeRememberCredentials()
+    public function removeRememberCredentials(): void
     {
         $this->updateRememberCredentials('', '');
     }
 
-    /**
-     * Get user role.
-     *
-     * @return HasOne
-     */
-    public function userRole()
+    public function userRole(): HasOne
     {
         return $this->hasOne('\App\Model\UserRole', 'user_id');
     }
@@ -81,13 +78,15 @@ class User extends EloquentModel
      *
      * @return bool
      */
-    public function hasRole(string $role)
+    public function hasRole(string $role): bool
     {
-        if (!($this->userRole() instanceof HasOne)) {
+        $userRole = $this->userRole()->first();
+
+        if (!$userRole instanceof UserRole) {
             return false;
         }
 
-        return (bool) $this->userRole()->{$role};
+        return (bool) $userRole->getAttribute($role);
     }
 
     /**
@@ -95,7 +94,7 @@ class User extends EloquentModel
      *
      * @return bool
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->hasRole('is_admin');
     }

@@ -9,12 +9,12 @@ use Console\Commands\ServeCommand;
 class Kernel
 {
     /**
-     * @var array<mixed>
+     * @var list<class-string<\Symfony\Component\Console\Command\Command>>
      */
     protected $commands = [];
 
     /**
-     * @var array<mixed>
+     * @var list<class-string<Command>>
      */
     protected $defaultCommands = [
         ServeCommand::class,
@@ -23,7 +23,7 @@ class Kernel
     /**
      * Get commands array.
      *
-     * @return array<mixed>
+     * @return list<class-string<\Symfony\Component\Console\Command\Command>>
      */
     public function getCommands(): array
     {
@@ -33,7 +33,7 @@ class Kernel
     /**
      * Get default commands array.
      *
-     * @return array<mixed>
+     * @return list<class-string<Command>>
      */
     public function getDefaultCommands(): array
     {

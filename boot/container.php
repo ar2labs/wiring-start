@@ -5,24 +5,25 @@ declare(strict_types=1);
 use App\Provider\Eloquent;
 use App\Provider\Router;
 
-use League\Route\Strategy\ApplicationStrategy;
+use Laminas\Diactoros\Response;
 
+use League\Route\Strategy\ApplicationStrategy;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+
 use Noodlehaus\Config;
 
 use PHPMailer\PHPMailer\PHPMailer;
-
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Log\LoggerInterface;
 
+use Psr\Log\LoggerInterface;
 use Throwable;
 use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
 
+use Twig\Loader\FilesystemLoader;
 use Wiring\Http\Exception\ErrorHandler;
 use Wiring\Http\Helpers\Console;
 use Wiring\Http\Helpers\Loader;
@@ -38,9 +39,8 @@ use Wiring\Interfaces\RouterInterface;
 use Wiring\Interfaces\SessionInterface;
 use Wiring\Interfaces\ViewStrategyInterface;
 use Wiring\Strategy\JsonStrategy;
-use Wiring\Strategy\ViewStrategy;
 
-use Laminas\Diactoros\Response;
+use Wiring\Strategy\ViewStrategy;
 
 return [
 
@@ -124,15 +124,18 @@ return [
     ) {
         // Load database settings
         $params = $container->get(ConfigInterface::class)->get('connections');
-        $conn = null;
+        $connection = env('DB_CONNECTION', 'eloquent');
 
         // Check enviroment database connection is Eloquent
-        if (env('DB_CONNECTION') == 'eloquent') {
+        if ($connection === 'eloquent') {
             // Create a Capsule instance
-            $conn = new Eloquent($params[env('DB_CONNECTION', 'eloquent')]);
+            return new Eloquent($params[$connection]);
         }
 
-        return $conn;
+        throw new RuntimeException(sprintf(
+            'Unsupported database connection "%s".',
+            (string) $connection
+        ));
     }),
 
     MailerInterface::class => function (ContainerInterface $container) {
@@ -160,7 +163,7 @@ return [
         $logger = new Logger('app');
 
         $fileHandler = new StreamHandler(
-            ROOT_PATH . 'storage/log/app.log',
+            STORAGE_PATH . '/log/app.log',
             $level = 'debug'
         );
 
