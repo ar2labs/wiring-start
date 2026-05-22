@@ -1,3 +1,6 @@
+/*
+ * Wiring Start CSS - Redesigned CSS-Only Modals
+ */
 
 .modal {
   opacity: 0;
@@ -7,9 +10,15 @@
   right: 0;
   bottom: 0;
   left: 0;
-  text-align: left;
-  background: rgba(0, 0, 0, 0.8);
-  transition: opacity .25s ease;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(9, 12, 16, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
+  padding: 1.5rem;
 }
 
 .modal__bg {
@@ -19,49 +28,97 @@
   bottom: 0;
   left: 0;
   cursor: pointer;
+  z-index: -1;
 }
 
 .modal-state {
-  display: none;
+  display: none !important;
 }
 
+/* Modal activation trigger */
 .modal-state:checked + .modal {
   opacity: 1;
   visibility: visible;
 }
 
 .modal-state:checked + .modal .modal__inner {
-  top: 0;
+  transform: scale(1);
+  opacity: 1;
 }
 
+/* Modal Inner Container */
 .modal__inner {
-  transition: top .25s ease;
-  position: absolute;
-  top: -20%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 25%;
-  margin: auto;
-  overflow: auto;
-  color: #000;
-  background: #fff;
-  border-radius: 5px;
-  padding: 1em 2em;
-  height: 50%;
+  background-color: #161c2c; /* Surface card */
+  border: 1px solid #202937; /* Dark slate gray */
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(254, 124, 20, 0.1);
+  padding: 2.25rem 2rem;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
-.modal__inner a {
-  color: #0067B3 !important;
+/* Modal Header and Title */
+.modal-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.modal-header h2::after {
+  display: none; /* Override standard global h2 border underline in modals */
+}
+
+/* Logo image wrapper inside modal */
+.modal-logo-wrapper {
+  margin-bottom: 1.25rem;
+}
+
+.modal-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: screen; /* Dissolves solid PNG dark borders */
+}
+
+.modal-desc {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.modal-desc strong {
+  color: #fff;
+}
+
+/* Close Trigger */
 .modal__close {
   position: absolute;
-  right: 1em;
-  top: 1em;
-  width: 1.1em;
-  height: 1.1em;
+  right: 1.25rem;
+  top: 1.25rem;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
 }
 
 .modal__close:after,
@@ -69,47 +126,147 @@
   content: '';
   position: absolute;
   width: 2px;
-  height: 1.5em;
-  background: #ccc;
-  display: block;
+  height: 12px;
+  background-color: #94a3b8;
+  border-radius: 1px;
+  transition: background-color 0.2s ease;
+}
+
+.modal__close:before {
   transform: rotate(45deg);
-  left: 50%;
-  margin: -3px 0 0 -1px;
-  top: 0;
+}
+
+.modal__close:after {
+  transform: rotate(-45deg);
+}
+
+.modal__close:hover {
+  background-color: rgba(254, 124, 20, 0.1);
+  border-color: rgba(254, 124, 20, 0.3);
 }
 
 .modal__close:hover:after,
 .modal__close:hover:before {
-  background: #aaa;
+  background-color: #fe7c14; /* Orange Close Accent */
 }
 
-.modal__close:before {
-  transform: rotate(-45deg);
+/* PSR Badges Section */
+.psr-grid-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  text-align: left;
 }
 
-.btn {
-  cursor: pointer;
-  background: #27ae60;
-  display: inline-block;
-  padding: .5em 1em;
+.psr-badges {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.psr-badge {
+  background-color: rgba(254, 124, 20, 0.05);
+  border: 1px solid rgba(254, 124, 20, 0.2);
+  color: #fe7c14 !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.2rem;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.psr-badge:hover {
+  background-color: #fe7c14;
+  color: #fff !important;
+  border-color: #fe7c14;
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(254, 124, 20, 0.25);
+}
+
+/* Contributor List Styling */
+.contributor-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contributor-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.contributor-item:hover {
+  background-color: rgba(254, 124, 20, 0.03);
+  border-color: rgba(254, 124, 20, 0.15);
+  transform: translateX(4px);
+}
+
+.contributor-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fe7c14, #ffb254);
   color: #fff;
-  border-radius: 3px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
 }
 
-.btn:hover,
-.btn:focus {
-  background: #2ecc71;
+.contributor-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.btn:active {
-  background: #27ae60;
-  box-shadow: 0 1px 2px rgba(0,0,0, .2) inset;
+.contributor-name {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-@media screen and (max-width: 768px) {
+.contributor-github {
+  color: #fe7c14 !important;
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+  align-self: flex-start;
+}
+
+.contributor-github:hover {
+  color: #ffb254 !important;
+  text-decoration: underline;
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+  .modal {
+    padding: 1rem;
+  }
+  
   .modal__inner {
-    width: 90%;
-    height: 90%;
-    box-sizing: border-box;
+    padding: 1.75rem 1.25rem;
+  }
+  
+  .psr-badges {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

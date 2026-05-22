@@ -1,44 +1,90 @@
-  <input class="modal-state" id="modal-1" type="checkbox" />
-  <div class="modal">
-    <label class="modal__bg" for="modal-1"></label>
+  <!-- CSS-Only Modal Trigger Checkboxes -->
+  <input class="modal-state" id="modal-1" type="checkbox" aria-hidden="true" />
+  <div class="modal" role="dialog" aria-labelledby="modal-about-title" aria-modal="true">
+    <label class="modal__bg" for="modal-1" aria-label="Close modal"></label>
     <div class="modal__inner">
-      <label class="modal__close" for="modal-1"></label>
-      <h2>About</h2>
-      <div class="center">
-       <img src="img/wiring-logo.png" alt="" />
+      <label class="modal__close" for="modal-1" aria-label="Close modal"></label>
+      <div class="modal-header">
+        <h2 id="modal-about-title">About</h2>
       </div>
-      <p>Wiring is a PHP micro framework core with Interoperability (PSRs).</p>
-      <p>This package is compliant with
-        <a href="https://www.php-fig.org/psr/psr-1/" target="_blank">PSR-1</a>,
-        <a href="https://www.php-fig.org/psr/psr-3/" target="_blank">PSR-3</a>,
-        <a href="https://www.php-fig.org/psr/psr-4/" target="_blank">PSR-4</a>,
-        <a href="https://www.php-fig.org/psr/psr-6/" target="_blank">PSR-6</a>,
-        <a href="https://www.php-fig.org/psr/psr-7/" target="_blank">PSR-7</a>,
-        <a href="https://www.php-fig.org/psr/psr-11/" target="_blank">PSR-11</a>,
-        <a href="https://www.php-fig.org/psr/psr-12/" target="_blank">PSR-12</a>,
-        <a href="https://www.php-fig.org/psr/psr-14/" target="_blank">PSR-14</a>,
-        <a href="https://www.php-fig.org/psr/psr-15/" target="_blank">PSR-15</a>,<br>
-        <a href="https://www.php-fig.org/psr/psr-17/" target="_blank">PSR-17</a>
-        and <a href="https://github.com/arcostasi" target="_blank">PSR-18.</a></p>
+      <div class="modal-body center">
+        <div class="modal-logo-wrapper">
+          <img src="img/wiring-logo.png" alt="Wiring Microframework Logo" class="modal-logo" />
+        </div>
+        <p class="modal-desc">
+          <strong>Wiring</strong> is a lightweight, high-performance PHP micro framework core structured around PSR Interoperability standards.
+        </p>
+        
+        <div class="psr-grid-title">Compliant PHP Standards:</div>
+        <div class="psr-badges">
+          <a href="https://www.php-fig.org/psr/psr-1/" target="_blank" class="psr-badge">PSR-1</a>
+          <a href="https://www.php-fig.org/psr/psr-3/" target="_blank" class="psr-badge">PSR-3</a>
+          <a href="https://www.php-fig.org/psr/psr-4/" target="_blank" class="psr-badge">PSR-4</a>
+          <a href="https://www.php-fig.org/psr/psr-6/" target="_blank" class="psr-badge">PSR-6</a>
+          <a href="https://www.php-fig.org/psr/psr-7/" target="_blank" class="psr-badge">PSR-7</a>
+          <a href="https://www.php-fig.org/psr/psr-11/" target="_blank" class="psr-badge">PSR-11</a>
+          <a href="https://www.php-fig.org/psr/psr-12/" target="_blank" class="psr-badge">PSR-12</a>
+          <a href="https://www.php-fig.org/psr/psr-14/" target="_blank" class="psr-badge">PSR-14</a>
+          <a href="https://www.php-fig.org/psr/psr-15/" target="_blank" class="psr-badge">PSR-15</a>
+          <a href="https://www.php-fig.org/psr/psr-17/" target="_blank" class="psr-badge">PSR-17</a>
+          <a href="https://github.com/arcostasi" target="_blank" class="psr-badge">PSR-18</a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <input class="modal-state" id="modal-2" type="checkbox" />
-  <div class="modal">
-    <label class="modal__bg" for="modal-2"></label>
+  <input class="modal-state" id="modal-2" type="checkbox" aria-hidden="true" />
+  <div class="modal" role="dialog" aria-labelledby="modal-contributors-title" aria-modal="true">
+    <label class="modal__bg" for="modal-2" aria-label="Close modal"></label>
     <div class="modal__inner">
-      <label class="modal__close" for="modal-2"></label>
-      <h2>Contributors</h2>
-      <div class="center">
-        <img src="img/wiring-logo.png" alt="" />
+      <label class="modal__close" for="modal-2" aria-label="Close modal"></label>
+      <div class="modal-header">
+        <h2 id="modal-contributors-title">Contributors</h2>
       </div>
-      <div>
-        <ul>
-          <li>Anderson Costa (<a href="https://github.com/arcostasi" target="_blank">@arcostasi</a>)</li>
-          <li>Chun-Sheng, Li (<a href="https://github.com/peter279k" target="_blank">@peter279k</a>)</li>
-          <li>Vinicius (<a href="https://github.com/vinyvicente" target="_blank">@vinyvicente</a>)</li>
-          <li>Alisson Lopes (<a href="https://github.com/alissonl3" target="_blank">alissonl3</a>)</li>
-          <li>André Silva (<a href="https://github.com/devgnx" target="_blank">devgnx</a>)</li>
+      <div class="modal-body">
+        <div class="modal-logo-wrapper center">
+          <img src="img/wiring-logo.png" alt="Wiring Microframework Logo" class="modal-logo" />
+        </div>
+        <p class="modal-desc center">
+          Thank you to the awesome people contributing to the Wiring ecosystem!
+        </p>
+        
+        <ul class="contributor-list">
+          <li class="contributor-item">
+            <span class="contributor-avatar">AC</span>
+            <div class="contributor-details">
+              <span class="contributor-name">Anderson Costa</span>
+              <a href="https://github.com/arcostasi" target="_blank" class="contributor-github">@arcostasi</a>
+            </div>
+          </li>
+          <li class="contributor-item">
+            <span class="contributor-avatar">CL</span>
+            <div class="contributor-details">
+              <span class="contributor-name">Chun-Sheng, Li</span>
+              <a href="https://github.com/peter279k" target="_blank" class="contributor-github">@peter279k</a>
+            </div>
+          </li>
+          <li class="contributor-item">
+            <span class="contributor-avatar">VN</span>
+            <div class="contributor-details">
+              <span class="contributor-name">Vinicius</span>
+              <a href="https://github.com/vinyvicente" target="_blank" class="contributor-github">@vinyvicente</a>
+            </div>
+          </li>
+          <li class="contributor-item">
+            <span class="contributor-avatar">AL</span>
+            <div class="contributor-details">
+              <span class="contributor-name">Alisson Lopes</span>
+              <a href="https://github.com/alissonl3" target="_blank" class="contributor-github">@alissonl3</a>
+            </div>
+          </li>
+          <li class="contributor-item">
+            <span class="contributor-avatar">AS</span>
+            <div class="contributor-details">
+              <span class="contributor-name">André Silva</span>
+              <a href="https://github.com/devgnx" target="_blank" class="contributor-github">@devgnx</a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
